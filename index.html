@@ -46,7 +46,7 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.4;
+      opacity: 0.35;
     }
 
     nav {
@@ -60,7 +60,11 @@
       background: linear-gradient(to bottom, rgba(10,8,6,0.95), transparent);
       transition: background 0.4s;
     }
-    nav.scrolled { background: rgba(10,8,6,0.97); border-bottom: 1px solid var(--border); }
+
+    nav.scrolled {
+      background: rgba(10,8,6,0.97);
+      border-bottom: 1px solid var(--border);
+    }
 
     .nav-logo {
       font-family: 'Cinzel', serif;
@@ -77,6 +81,7 @@
       gap: 36px;
       list-style: none;
     }
+
     .nav-links a {
       font-family: 'Lato', sans-serif;
       font-weight: 300;
@@ -87,6 +92,7 @@
       text-decoration: none;
       transition: color 0.3s;
     }
+
     .nav-links a:hover { color: var(--gold); }
 
     .nav-cta {
@@ -100,7 +106,11 @@
       text-decoration: none;
       transition: all 0.3s;
     }
-    .nav-cta:hover { background: var(--gold); color: var(--dark); }
+
+    .nav-cta:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
 
     .hero {
       min-height: 100vh;
@@ -113,7 +123,7 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(rgba(10,8,6,0.55), rgba(10,8,6,0.72)),
+        linear-gradient(rgba(10,8,6,0.58), rgba(10,8,6,0.76)),
         url('hero.png') center/cover no-repeat;
     }
 
@@ -126,6 +136,16 @@
       pointer-events: none;
     }
 
+    .hero-eyebrow,
+    .hero h1,
+    .hero-subtitle,
+    .hero-line,
+    .hero-para,
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+    }
+
     .hero-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 11px;
@@ -136,8 +156,6 @@
       margin-bottom: 28px;
       opacity: 0;
       animation: fadeUp 1s 0.3s forwards;
-      position: relative;
-      z-index: 1;
     }
 
     .hero h1 {
@@ -150,8 +168,6 @@
       margin-bottom: 12px;
       opacity: 0;
       animation: fadeUp 1.1s 0.5s forwards;
-      position: relative;
-      z-index: 1;
     }
 
     .hero h1 em {
@@ -168,8 +184,6 @@
       margin-bottom: 48px;
       opacity: 0;
       animation: fadeUp 1.1s 0.7s forwards;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-line {
@@ -179,8 +193,6 @@
       margin: 0 auto 48px;
       opacity: 0;
       animation: fadeUp 1s 0.9s forwards;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-para {
@@ -191,8 +203,6 @@
       margin-bottom: 52px;
       opacity: 0;
       animation: fadeUp 1s 1.1s forwards;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-actions {
@@ -202,42 +212,46 @@
       justify-content: center;
       opacity: 0;
       animation: fadeUp 1s 1.3s forwards;
-      position: relative;
-      z-index: 1;
+    }
+
+    .btn-primary, .btn-secondary {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      text-decoration: none;
+      transition: all 0.3s;
     }
 
     .btn-primary {
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 16px 36px;
       background: var(--gold);
       color: var(--dark);
-      text-decoration: none;
       font-weight: 600;
-      transition: all 0.3s;
     }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
 
     .btn-secondary {
-      font-family: 'Cinzel', serif;
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 16px 36px;
       background: transparent;
       border: 1px solid var(--border-bright);
       color: var(--cream);
-      text-decoration: none;
-      transition: all 0.3s;
     }
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
 
     .section-header {
       text-align: center;
       margin-bottom: 64px;
     }
+
     .section-eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 10px;
@@ -247,6 +261,7 @@
       margin-bottom: 16px;
       display: block;
     }
+
     .section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(36px, 5vw, 58px);
@@ -254,12 +269,23 @@
       line-height: 1.1;
       color: var(--cream);
     }
-    .section-title em { font-style: italic; color: var(--gold); }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .story,
+    .characters,
+    .how,
+    .poster {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
     .story {
-      padding: 100px 24px;
       max-width: 1000px;
-      margin: 0 auto;
     }
 
     .story-quote {
@@ -269,11 +295,14 @@
       font-style: italic;
       line-height: 1.5;
       color: var(--cream);
-      text-align: center;
       margin-bottom: 48px;
       border-left: 2px solid var(--gold);
       padding-left: 32px;
       text-align: left;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 48px;
     }
 
     .story-body {
@@ -283,6 +312,7 @@
       max-width: 800px;
       margin: 0 auto;
     }
+
     .story-body p { margin-bottom: 24px; }
 
     .stats {
@@ -309,6 +339,7 @@
       line-height: 1;
       margin-bottom: 8px;
     }
+
     .stat-label {
       font-family: 'Cinzel', serif;
       font-size: 10px;
@@ -317,73 +348,17 @@
       color: var(--cream-dim);
     }
 
-    .characters {
-      padding: 100px 24px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .characters-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2px;
-      margin-top: 64px;
-    }
-
-    .character-card {
-      background: var(--dark-card);
-      border: 1px solid var(--border);
-      padding: 48px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.4s;
-    }
-    .character-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      transform: scaleX(0);
-      transition: transform 0.4s;
-    }
-    .character-card:hover { border-color: var(--border-bright); }
-    .character-card:hover::before { transform: scaleX(1); }
-
-    .character-symbol {
-      font-size: 32px;
-      margin-bottom: 24px;
-    }
-    .character-name {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 8px;
-      letter-spacing: 0.05em;
-    }
-    .character-role {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 15px;
-      color: var(--gold-dim);
-      margin-bottom: 20px;
-      letter-spacing: 0.05em;
-    }
-    .character-desc {
-      font-size: 15px;
-      line-height: 1.75;
-      color: var(--cream-dim);
-    }
-
-    .lily {
+    .lily,
+    .remembrance,
+    .merch {
       padding: 100px 24px;
       background: var(--dark-mid);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
-    .lily-inner {
+    .lily-inner,
+    .remembrance-inner {
       max-width: 1000px;
       margin: 0 auto;
       text-align: center;
@@ -416,10 +391,62 @@
       color: var(--gold-dim);
     }
 
-    .how {
-      padding: 100px 24px;
-      max-width: 900px;
-      margin: 0 auto;
+    .characters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+      margin-top: 64px;
+    }
+
+    .character-card {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      padding: 48px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s;
+    }
+
+    .character-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .character-card:hover { border-color: var(--border-bright); }
+    .character-card:hover::before { transform: scaleX(1); }
+
+    .character-symbol {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+
+    .character-name {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .character-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--gold-dim);
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+
+    .character-desc {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--cream-dim);
     }
 
     .flow {
@@ -441,6 +468,7 @@
       flex-direction: column;
       align-items: center;
     }
+
     .flow-circle {
       width: 48px; height: 48px;
       border: 1px solid var(--gold);
@@ -451,6 +479,7 @@
       color: var(--gold);
       flex-shrink: 0;
     }
+
     .flow-line {
       width: 1px;
       flex: 1;
@@ -462,6 +491,7 @@
     .flow-content {
       padding: 8px 0 40px;
     }
+
     .flow-title {
       font-family: 'Cinzel', serif;
       font-size: 16px;
@@ -470,28 +500,15 @@
       margin-bottom: 10px;
       letter-spacing: 0.05em;
     }
+
     .flow-desc {
       font-size: 15px;
       line-height: 1.8;
       color: var(--cream-dim);
     }
 
-    .remembrance {
-      padding: 100px 24px;
-      background: var(--dark-mid);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .remembrance-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
     .merch {
-      padding: 100px 24px;
-      background: var(--dark-mid);
-      border-top: 1px solid var(--border);
+      border-bottom: none;
     }
 
     .merch-grid {
@@ -511,9 +528,14 @@
       gap: 8px;
       transition: background 0.3s;
     }
+
     .merch-card:hover { background: #1c190f; }
 
-    .merch-icon { font-size: 28px; margin-bottom: 12px; }
+    .merch-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
     .merch-name {
       font-family: 'Cinzel', serif;
       font-size: 14px;
@@ -521,18 +543,21 @@
       letter-spacing: 0.1em;
       color: var(--cream);
     }
+
     .merch-note {
       font-size: 13px;
       color: var(--cream-dim);
       line-height: 1.5;
       flex: 1;
     }
+
     .merch-price {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px;
       color: var(--gold);
       margin-top: 12px;
     }
+
     .merch-btn {
       font-family: 'Cinzel', serif;
       font-size: 11px;
@@ -548,7 +573,11 @@
       display: block;
       transition: all 0.3s;
     }
-    .merch-btn:hover { background: var(--gold); color: var(--dark); }
+
+    .merch-btn:hover {
+      background: var(--gold);
+      color: var(--dark);
+    }
 
     .merch-code {
       text-align: center;
@@ -558,6 +587,7 @@
       font-size: 18px;
       color: var(--cream-dim);
     }
+
     .merch-code strong {
       color: var(--gold);
       font-style: normal;
@@ -581,7 +611,11 @@
       pointer-events: none;
     }
 
-    .donate-inner { max-width: 640px; margin: 0 auto; position: relative; }
+    .donate-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+    }
 
     .donate-verse {
       font-family: 'Cormorant Garamond', serif;
@@ -623,6 +657,7 @@
       letter-spacing: 0.1em;
       margin-bottom: 8px;
     }
+
     .footer-tagline {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -630,6 +665,7 @@
       color: var(--cream-dim);
       margin-bottom: 32px;
     }
+
     .footer-links {
       display: flex;
       justify-content: center;
@@ -638,6 +674,7 @@
       margin-bottom: 32px;
       list-style: none;
     }
+
     .footer-links a {
       font-size: 12px;
       letter-spacing: 0.15em;
@@ -646,7 +683,9 @@
       text-decoration: none;
       transition: color 0.3s;
     }
+
     .footer-links a:hover { color: var(--gold); }
+
     .footer-copy {
       font-size: 12px;
       color: #444;
@@ -684,9 +723,62 @@
       background: #000;
     }
 
+    .lumin-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      border: 1px solid var(--border-bright);
+      background: rgba(10,8,6,0.92);
+      color: var(--gold);
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .lumin-panel {
+      position: fixed;
+      bottom: 78px;
+      right: 20px;
+      z-index: 1001;
+      width: min(320px, calc(100vw - 40px));
+      background: rgba(17,15,11,0.98);
+      border: 1px solid var(--border);
+      padding: 20px;
+      display: none;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    }
+
+    .lumin-panel h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .lumin-panel p {
+      color: var(--cream-dim);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .lumin-panel a {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .reveal {
@@ -694,6 +786,7 @@
       transform: translateY(32px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
+
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
@@ -703,6 +796,8 @@
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
       .flow-item { grid-template-columns: 48px 1fr; gap: 16px; }
+      .lumin-button { bottom: 16px; right: 16px; }
+      .lumin-panel { right: 16px; bottom: 72px; }
     }
   </style>
 </head>
@@ -791,12 +886,8 @@
         <span class="section-eyebrow">From Forged of Mercy — Series I</span>
         <h2 class="section-title">The Night <em>Mercy Cried</em></h2>
       </div>
-      <p class="lily-quote reveal">
-        "Am… I… home?"
-      </p>
-      <p class="lily-answer reveal">
-        "Yes, angel… you're home now. You're safe. You're home."
-      </p>
+      <p class="lily-quote reveal">"Am… I… home?"</p>
+      <p class="lily-answer reveal">"Yes, angel… you're home now. You're safe. You're home."</p>
       <p class="story-body reveal" style="text-align:center; max-width:560px; margin: 0 auto 32px;">
         A barefoot child, freezing in the snow, dying alone on the street. In her final moments, she is held — not abandoned. Loved — not forgotten. This story became the blueprint for the real House of Mercy.
       </p>
@@ -971,6 +1062,25 @@
     <p class="merch-code reveal">Use code <strong>MERCY15</strong> for 15% off your first order</p>
   </section>
 
+  <section class="poster">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Forged Universe</span>
+      <h2 class="section-title">The <em>Dragon</em> Awakens</h2>
+    </div>
+
+    <div class="reveal" style="max-width:900px; margin:0 auto; text-align:center;">
+      <img src="dragon.jpg" alt="Forged Dragon Poster" class="section-image" style="margin-top:0;">
+      <p style="font-family:'Cormorant Garamond', serif; font-size:20px; color:#C9B99A; margin:24px 0;">
+        A symbol of power, faith, and the fire that never dies.
+      </p>
+      <p style="font-size:15px; color:#C9B99A; max-width:500px; margin:0 auto 32px; line-height:1.8;">
+        The dragon is more than a creature — it is the spirit of the Forged.
+        Born in fire. Refined in struggle. Unbreakable in purpose.
+      </p>
+      <a href="#donate" class="btn-primary">Own the Poster</a>
+    </div>
+  </section>
+
   <section class="donate" id="donate">
     <div class="donate-inner">
       <div class="reveal">
@@ -1003,6 +1113,21 @@
     <p class="footer-copy">© 2026 GE &amp; LE Studios — The Forged Brothers. All rights reserved.</p>
   </footer>
 
+  <!-- Background music -->
+  <audio id="bg-music" loop>
+    <source src="hopeignite.mp4" type="audio/mp4">
+  </audio>
+
+  <!-- Lumin AI -->
+  <button class="lumin-button" onclick="toggleLumin()">✦ Lumin AI</button>
+
+  <div class="lumin-panel" id="lumin-panel">
+    <h3>LUMIN AI</h3>
+    <p>Welcome, brother. House of Mercy stands for compassion, dignity, remembrance, and hope.</p>
+    <p>Tap below to support the mission or continue exploring the Forged world.</p>
+    <a href="#donate">GO TO SUPPORT</a>
+  </div>
+
   <script>
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
@@ -1019,6 +1144,24 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+
+    const music = document.getElementById('bg-music');
+    music.volume = 0.15;
+
+    document.addEventListener('click', () => {
+      if (music.paused) {
+        music.play().catch(() => {});
+      }
+    }, { once: true });
+
+    function toggleLumin() {
+      const panel = document.getElementById('lumin-panel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+
+      if (music.paused) {
+        music.play().catch(() => {});
+      }
+    }
   </script>
 
 </body>

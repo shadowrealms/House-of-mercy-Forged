@@ -39,7 +39,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── NOISE OVERLAY ─── */
     body::before {
       content: '';
       position: fixed;
@@ -50,7 +49,6 @@
       opacity: 0.4;
     }
 
-    /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -104,7 +102,6 @@
     }
     .nav-cta:hover { background: var(--gold); color: var(--dark); }
 
-    /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -115,6 +112,9 @@
       padding: 120px 24px 80px;
       position: relative;
       overflow: hidden;
+      background:
+        linear-gradient(rgba(10,8,6,0.55), rgba(10,8,6,0.72)),
+        url('hero.png') center/cover no-repeat;
     }
 
     .hero-glow {
@@ -136,6 +136,8 @@
       margin-bottom: 28px;
       opacity: 0;
       animation: fadeUp 1s 0.3s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
@@ -148,6 +150,8 @@
       margin-bottom: 12px;
       opacity: 0;
       animation: fadeUp 1.1s 0.5s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 em {
@@ -164,6 +168,8 @@
       margin-bottom: 48px;
       opacity: 0;
       animation: fadeUp 1.1s 0.7s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-line {
@@ -173,6 +179,8 @@
       margin: 0 auto 48px;
       opacity: 0;
       animation: fadeUp 1s 0.9s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-para {
@@ -183,6 +191,8 @@
       margin-bottom: 52px;
       opacity: 0;
       animation: fadeUp 1s 1.1s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-actions {
@@ -192,6 +202,8 @@
       justify-content: center;
       opacity: 0;
       animation: fadeUp 1s 1.3s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-primary {
@@ -222,19 +234,6 @@
     }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-    /* ─── DIVIDER ─── */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      max-width: 300px;
-      margin: 0 auto;
-      padding: 60px 0;
-    }
-    .divider-line { flex: 1; height: 1px; background: var(--border); }
-    .divider-icon { color: var(--gold); font-size: 18px; }
-
-    /* ─── SECTION HEADER ─── */
     .section-header {
       text-align: center;
       margin-bottom: 64px;
@@ -257,10 +256,9 @@
     }
     .section-title em { font-style: italic; color: var(--gold); }
 
-    /* ─── THE STORY ─── */
     .story {
       padding: 100px 24px;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
@@ -282,10 +280,11 @@
       font-size: 17px;
       line-height: 2;
       color: var(--cream-dim);
+      max-width: 800px;
+      margin: 0 auto;
     }
     .story-body p { margin-bottom: 24px; }
 
-    /* ─── MISSION STATS ─── */
     .stats {
       background: var(--dark-mid);
       border-top: 1px solid var(--border);
@@ -318,7 +317,6 @@
       color: var(--cream-dim);
     }
 
-    /* ─── CHARACTERS ─── */
     .characters {
       padding: 100px 24px;
       max-width: 1100px;
@@ -378,7 +376,6 @@
       color: var(--cream-dim);
     }
 
-    /* ─── LILY'S STORY ─── */
     .lily {
       padding: 100px 24px;
       background: var(--dark-mid);
@@ -387,7 +384,7 @@
     }
 
     .lily-inner {
-      max-width: 760px;
+      max-width: 1000px;
       margin: 0 auto;
       text-align: center;
     }
@@ -419,7 +416,6 @@
       color: var(--gold-dim);
     }
 
-    /* ─── HOW IT WORKS ─── */
     .how {
       padding: 100px 24px;
       max-width: 900px;
@@ -480,7 +476,18 @@
       color: var(--cream-dim);
     }
 
-    /* ─── MERCHANDISE ─── */
+    .remembrance {
+      padding: 100px 24px;
+      background: var(--dark-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .remembrance-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
     .merch {
       padding: 100px 24px;
       background: var(--dark-mid);
@@ -558,7 +565,6 @@
       letter-spacing: 0.1em;
     }
 
-    /* ─── DONATE ─── */
     .donate {
       padding: 120px 24px;
       text-align: center;
@@ -603,7 +609,6 @@
       margin-bottom: 48px;
     }
 
-    /* ─── FOOTER ─── */
     footer {
       border-top: 1px solid var(--border);
       padding: 48px 24px;
@@ -647,7 +652,38 @@
       color: #444;
     }
 
-    /* ─── ANIMATIONS ─── */
+    .section-image {
+      width: 100%;
+      max-width: 900px;
+      display: block;
+      margin: 40px auto 0;
+      border: 1px solid var(--border);
+      background: var(--dark-card);
+    }
+
+    .story-media,
+    .lily-media,
+    .vision-media,
+    .video-wrap {
+      max-width: 1000px;
+      margin: 48px auto 0;
+    }
+
+    .media-caption {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--cream-dim);
+      margin-top: 18px;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -663,7 +699,6 @@
       transform: translateY(0);
     }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       nav { padding: 16px 20px; }
       .nav-links { display: none; }
@@ -674,7 +709,6 @@
 
 <body>
 
-  <!-- NAV -->
   <nav id="nav">
     <a href="#" class="nav-logo">House of Mercy</a>
     <ul class="nav-links">
@@ -686,7 +720,6 @@
     <a href="#donate" class="nav-cta">Support</a>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-glow"></div>
     <p class="hero-eyebrow">GE &amp; LE Studios — The Forged Brothers Saga</p>
@@ -703,7 +736,6 @@
     </div>
   </section>
 
-  <!-- STATS -->
   <section class="stats">
     <div class="stats-grid">
       <div class="reveal">
@@ -725,7 +757,6 @@
     </div>
   </section>
 
-  <!-- STORY -->
   <section class="story" id="story">
     <div class="section-header reveal">
       <span class="section-eyebrow">The Origin</span>
@@ -747,9 +778,13 @@
         On January 23rd, 2026, he walked 30 kilometres in 30-degree heat to hand-deliver his proposal to OpenAI and Google in Sydney. No suit. Just track pants, a t-shirt, and faith. Because if stories can move hearts — they can also move lives.
       </p>
     </div>
+
+    <div class="story-media reveal">
+      <img src="fallen star.jpg" alt="Ceiling of stars in the House of Mercy remembering children lost too soon." class="section-image">
+      <p class="media-caption">The Library of Stars — every child remembered, every name held in light.</p>
+    </div>
   </section>
 
-  <!-- LILY -->
   <section class="lily">
     <div class="lily-inner">
       <div class="reveal">
@@ -769,10 +804,13 @@
         Some children do not die on the street.<br>
         Some children go home in the arms of Mercy.
       </p>
+
+      <div class="lily-media reveal">
+        <img src="forge way.jpg" alt="House of Mercy vision scene." class="section-image">
+      </div>
     </div>
   </section>
 
-  <!-- CHARACTERS -->
   <section class="characters" id="characters">
     <div class="section-header reveal">
       <span class="section-eyebrow">Series I — The Forging of Souls</span>
@@ -801,7 +839,6 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section class="how" id="mission">
     <div class="section-header reveal">
       <span class="section-eyebrow">The Model</span>
@@ -851,7 +888,30 @@
     </div>
   </section>
 
-  <!-- MERCHANDISE -->
+  <section class="remembrance">
+    <div class="remembrance-inner">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">The Vision</span>
+        <h2 class="section-title">Built to <em>Endure</em></h2>
+      </div>
+
+      <div class="vision-media reveal">
+        <img src="investment.png" alt="Investment vision for GE and LE Studios." class="section-image">
+      </div>
+
+      <div class="vision-media reveal">
+        <img src="stratergy.png" alt="Strategy image for House of Mercy and The Forged Saga." class="section-image">
+      </div>
+
+      <div class="video-wrap reveal">
+        <video controls playsinline>
+          <source src="hopeignite.mp4" type="video/mp4">
+        </video>
+        <p class="media-caption">Hope Ignite — the mission in motion.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="merch" id="merch">
     <div class="section-header reveal">
       <span class="section-eyebrow">Shop the Mission</span>
@@ -866,6 +926,7 @@
         <div class="merch-price">$49.99</div>
         <a href="#donate" class="merch-btn">Add to Cart</a>
       </div>
+
       <div class="merch-card reveal">
         <div class="merch-icon">👗</div>
         <div class="merch-name">Forged Dress</div>
@@ -873,6 +934,7 @@
         <div class="merch-price">$59.99</div>
         <a href="#donate" class="merch-btn">Add to Cart</a>
       </div>
+
       <div class="merch-card reveal">
         <div class="merch-icon">🧣</div>
         <div class="merch-name">Forged Jacket</div>
@@ -880,13 +942,15 @@
         <div class="merch-price">$89.99</div>
         <a href="#donate" class="merch-btn">Add to Cart</a>
       </div>
+
       <div class="merch-card reveal">
-        <div class="merch-icon">⌚</div>
+        <img src="watch.jpg" alt="Forged Watch" class="section-image" style="margin:0 0 16px 0; max-width:100%;">
         <div class="merch-name">Forged Watch</div>
         <p class="merch-note">Time given in service. Every second counts.</p>
         <div class="merch-price">$129.99</div>
         <a href="#donate" class="merch-btn">Add to Cart</a>
       </div>
+
       <div class="merch-card reveal">
         <div class="merch-icon">👜</div>
         <div class="merch-name">Forged Handbag</div>
@@ -894,6 +958,7 @@
         <div class="merch-price">$74.99</div>
         <a href="#donate" class="merch-btn">Add to Cart</a>
       </div>
+
       <div class="merch-card reveal">
         <div class="merch-icon">🖼️</div>
         <div class="merch-name">Forged Poster</div>
@@ -906,7 +971,6 @@
     <p class="merch-code reveal">Use code <strong>MERCY15</strong> for 15% off your first order</p>
   </section>
 
-  <!-- DONATE -->
   <section class="donate" id="donate">
     <div class="donate-inner">
       <div class="reveal">
@@ -926,7 +990,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">GE &amp; LE Studios</div>
     <p class="footer-tagline">Where creativity funds compassion.</p>
@@ -941,13 +1004,11 @@
   </footer>
 
   <script>
-    // Nav scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {

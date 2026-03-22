@@ -278,7 +278,8 @@
     .story,
     .characters,
     .how,
-    .poster {
+    .poster,
+    .fashion-section {
       padding: 100px 24px;
       max-width: 1100px;
       margin: 0 auto;
@@ -703,7 +704,8 @@
     .story-media,
     .lily-media,
     .vision-media,
-    .video-wrap {
+    .video-wrap,
+    .fashion-media {
       max-width: 1000px;
       margin: 48px auto 0;
     }
@@ -721,6 +723,35 @@
       width: 100%;
       border: 1px solid var(--border);
       background: #000;
+      display: block;
+    }
+
+    .fashion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .fashion-card {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .fashion-card img,
+    .fashion-card video {
+      width: 100%;
+      display: block;
+      border: 1px solid var(--border);
+      background: #000;
+    }
+
+    .fashion-card p {
+      margin-top: 16px;
+      color: var(--cream-dim);
+      line-height: 1.8;
+      text-align: center;
     }
 
     .lumin-button {
@@ -994,11 +1025,59 @@
         <img src="stratergy.png" alt="Strategy image for House of Mercy and The Forged Saga." class="section-image">
       </div>
 
+      <div class="vision-media reveal">
+        <img src="godsbanquet.jpg" alt="God's banquet vision for House of Mercy." class="section-image">
+        <p class="media-caption">A table of welcome, dignity, and provision.</p>
+      </div>
+
       <div class="video-wrap reveal">
         <video controls playsinline>
           <source src="hopeignite.mp4" type="video/mp4">
         </video>
         <p class="media-caption">Hope Ignite — the mission in motion.</p>
+      </div>
+
+      <div class="video-wrap reveal">
+        <video controls playsinline>
+          <source src="offical.mp4" type="video/mp4">
+        </video>
+        <p class="media-caption">Official House of Mercy vision reel.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fashion-section">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Forged Fashion</span>
+      <h2 class="section-title">Wear the <em>Mission</em></h2>
+    </div>
+
+    <div class="fashion-grid">
+      <div class="fashion-card reveal">
+        <img src="fashion.jpg" alt="Forged fashion concept image">
+        <p>Forged style designed with dignity, strength, and story at its core.</p>
+      </div>
+
+      <div class="fashion-card reveal">
+        <img src="forgedfashion.jpg" alt="Forged fashion display">
+        <p>Fashion that carries identity, purpose, and the House of Mercy mission.</p>
+      </div>
+
+      <div class="fashion-card reveal">
+        <img src="hoodies.png" alt="Forged hoodies collection">
+        <p>A collection built to be worn with meaning.</p>
+      </div>
+
+      <div class="fashion-card reveal">
+        <img src="hoodies1.jpg" alt="Forged hoodies alternate view">
+        <p>Comfort, warmth, and witness — all in one design.</p>
+      </div>
+
+      <div class="fashion-card reveal" style="grid-column: 1 / -1;">
+        <video controls playsinline>
+          <source src="merch.mp4" type="video/mp4">
+        </video>
+        <p>Forged merchandise in motion.</p>
       </div>
     </div>
   </section>
@@ -1113,12 +1192,6 @@
     <p class="footer-copy">© 2026 GE &amp; LE Studios — The Forged Brothers. All rights reserved.</p>
   </footer>
 
-  <!-- Background music -->
-  <audio id="bg-music" loop>
-    <source src="hopeignite.mp4" type="audio/mp4">
-  </audio>
-
-  <!-- Lumin AI -->
   <button class="lumin-button" onclick="toggleLumin()">✦ Lumin AI</button>
 
   <div class="lumin-panel" id="lumin-panel">
@@ -1145,22 +1218,9 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    const music = document.getElementById('bg-music');
-    music.volume = 0.15;
-
-    document.addEventListener('click', () => {
-      if (music.paused) {
-        music.play().catch(() => {});
-      }
-    }, { once: true });
-
     function toggleLumin() {
       const panel = document.getElementById('lumin-panel');
       panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
-
-      if (music.paused) {
-        music.play().catch(() => {});
-      }
     }
   </script>
 

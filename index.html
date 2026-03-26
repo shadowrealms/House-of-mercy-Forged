@@ -302,14 +302,11 @@
       font-style: italic;
       line-height: 1.5;
       color: var(--cream);
-      margin-bottom: 48px;
       border-left: 2px solid var(--gold);
       padding-left: 32px;
       text-align: left;
       max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 48px;
+      margin: 0 auto 48px;
     }
 
     .story-body {
@@ -477,10 +474,13 @@
     }
 
     .flow-circle {
-      width: 48px; height: 48px;
+      width: 48px;
+      height: 48px;
       border: 1px solid var(--gold);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-family: 'Cinzel', serif;
       font-size: 14px;
       color: var(--gold);
@@ -613,7 +613,8 @@
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      width: 500px; height: 500px;
+      width: 500px;
+      height: 500px;
       background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
@@ -1208,6 +1209,23 @@
         <p>Forged merchandise in motion.</p>
       </div>
     </div>
+
+    <div class="section-header reveal" style="margin-top: 80px;">
+      <span class="section-eyebrow">Forged Hoodies</span>
+      <h2 class="section-title">The <em>Hoodie Collection</em></h2>
+    </div>
+
+    <div class="fashion-grid">
+      <div class="fashion-card reveal">
+        <img src="hoodies.png" alt="Forged hoodie collection main image">
+        <p>Forged hoodies designed with warmth, dignity, and purpose at the center of every piece.</p>
+      </div>
+
+      <div class="fashion-card reveal">
+        <img src="hoodies1.jpg" alt="Forged hoodie collection alternate image">
+        <p>Built for comfort and story — clothing that carries the mission beyond the page.</p>
+      </div>
+    </div>
   </section>
 
   <section class="merch" id="merch">
@@ -1276,7 +1294,6 @@
     </div>
 
     <div class="poster-grid">
-
       <div class="poster-card reveal">
         <img src="forgedsaga.png" alt="Stephen and Zephyr with dragons poster">
         <div class="poster-overlay">
@@ -1300,7 +1317,6 @@
           <p>A vision of legacy, light, story, and the world we are building together through faith, imagination, and purpose.</p>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1389,6 +1405,7 @@
         }
       });
     }, { threshold: 0.1 });
+
     reveals.forEach(el => observer.observe(el));
 
     function toggleLumin() {

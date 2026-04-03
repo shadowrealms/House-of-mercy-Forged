@@ -226,6 +226,7 @@
       padding: 16px 36px;
       text-decoration: none;
       transition: all 0.3s;
+      display: inline-block;
     }
 
     .btn-primary {
@@ -285,7 +286,9 @@
     .poster,
     .fashion-section,
     .contact-section,
-    .privacy-section {
+    .privacy-section,
+    .book-section,
+    .youtube-section {
       padding: 100px 24px;
       max-width: 1100px;
       margin: 0 auto;
@@ -652,13 +655,17 @@
     }
 
     .contact-section,
-    .privacy-section {
+    .privacy-section,
+    .book-section,
+    .youtube-section {
       border-top: 1px solid var(--border);
     }
 
     .contact-box,
-    .privacy-box {
-      max-width: 820px;
+    .privacy-box,
+    .book-box,
+    .youtube-box {
+      max-width: 980px;
       margin: 0 auto;
       background: var(--dark-card);
       border: 1px solid var(--border);
@@ -666,7 +673,9 @@
     }
 
     .contact-box p,
-    .privacy-box p {
+    .privacy-box p,
+    .book-box p,
+    .youtube-box p {
       color: var(--cream-dim);
       line-height: 1.9;
       font-size: 15px;
@@ -675,9 +684,20 @@
     }
 
     .contact-box a,
-    .privacy-box a {
+    .privacy-box a,
+    .book-box a,
+    .youtube-box a {
       color: var(--gold);
       text-decoration: none;
+    }
+
+    .book-buttons,
+    .youtube-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
     }
 
     footer {
@@ -930,6 +950,8 @@
       <li><a href="#story">Story</a></li>
       <li><a href="#characters">Characters</a></li>
       <li><a href="#mission">Mission</a></li>
+      <li><a href="#book">Healing Book</a></li>
+      <li><a href="#youtube">YouTube</a></li>
       <li><a href="#merch">Shop</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
@@ -1175,6 +1197,68 @@
     </div>
   </section>
 
+  <section class="book-section" id="book">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Healing Through Story</span>
+      <h2 class="section-title">Featured <em>Book of Healing</em></h2>
+    </div>
+
+    <div class="book-box reveal">
+      <div class="fashion-grid" style="align-items:center; margin-top:0;">
+        <div class="fashion-card">
+          <img src="sacredsolitude.jpg" alt="Sacred Solitude book cover by Poppins">
+        </div>
+
+        <div class="fashion-card" style="display:flex; flex-direction:column; justify-content:center;">
+          <p style="font-family:'Cinzel', serif; color:var(--gold); font-size:13px; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:14px; text-align:left;">
+            Featured Healing Book
+          </p>
+
+          <p style="font-family:'Cormorant Garamond', serif; font-size:40px; line-height:1.1; color:var(--cream); margin-bottom:18px; text-align:left;">
+            Sacred <em style="color:var(--gold);">Solitude</em>
+          </p>
+
+          <p style="font-family:'Cormorant Garamond', serif; font-size:22px; font-style:italic; color:var(--cream-dim); margin-bottom:18px; text-align:left;">
+            A Journey of Healing, Wholeness, and Becoming
+          </p>
+
+          <p style="color:var(--cream-dim); line-height:1.9; margin-bottom:18px; text-align:left;">
+            We honour books that help people heal. This featured work carries a gentle, reflective spirit — a journey through restoration, inner healing, and becoming whole again.
+          </p>
+
+          <p style="color:var(--cream-dim); line-height:1.9; margin-bottom:28px; text-align:left;">
+            Written to encourage wounded hearts, this book stands beautifully beside the wider House of Mercy vision: compassion, dignity, healing, and the quiet rebuilding of the soul.
+          </p>
+
+          <div class="book-buttons" style="justify-content:flex-start;">
+            <a href="https://www.amazon.com.au/dp/1764387406?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&ref_=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&social_share=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&bestFormat=true" target="_blank" rel="noopener noreferrer" class="btn-primary">View on Amazon</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="youtube-section" id="youtube">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Watch the Message</span>
+      <h2 class="section-title">Our <em>YouTube</em> Channel</h2>
+    </div>
+
+    <div class="youtube-box reveal">
+      <p>
+        Follow our visual journey as we continue building House of Mercy, sharing our message, our mission, and the stories that carry compassion into the world.
+      </p>
+      <p>
+        Watch our featured YouTube short and stay connected as the vision continues to grow.
+      </p>
+
+      <div class="youtube-buttons">
+        <a href="https://youtube.com/shorts/uaUwVAiGKZw?si=0un47DdxWERa7G9m" target="_blank" rel="noopener noreferrer" class="btn-primary">Watch YouTube Short</a>
+        <a href="https://www.linkedin.com/in/forgebrothers" target="_blank" rel="noopener noreferrer" class="btn-secondary">Follow on LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
   <section class="fashion-section">
     <div class="section-header reveal">
       <span class="section-eyebrow">Forged Fashion</span>
@@ -1347,6 +1431,8 @@
     <div class="contact-box reveal">
       <p>If you would like to support the mission, collaborate, or reach out to GE &amp; LE Studios, we welcome your message.</p>
       <p>Email: <a href="mailto:gumworld1976@yahoo.com.au">gumworld1976@yahoo.com.au</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/forgebrothers" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/forgebrothers</a></p>
+      <p>YouTube: <a href="https://youtube.com/shorts/uaUwVAiGKZw?si=0un47DdxWERa7G9m" target="_blank" rel="noopener noreferrer">Watch our latest short</a></p>
     </div>
   </section>
 
@@ -1370,10 +1456,14 @@
       <li><a href="#story">Our Story</a></li>
       <li><a href="#characters">The Guardians</a></li>
       <li><a href="#mission">The Mission</a></li>
+      <li><a href="#book">Healing Book</a></li>
+      <li><a href="#youtube">YouTube</a></li>
       <li><a href="#merch">Shop</a></li>
       <li><a href="#donate">Donate</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
+      <li><a href="https://www.linkedin.com/in/forgebrothers" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://youtube.com/shorts/uaUwVAiGKZw?si=0un47DdxWERa7G9m" target="_blank" rel="noopener noreferrer">YouTube</a></li>
     </ul>
     <p class="footer-copy">© 2026 GE &amp; LE Studios — The Forged Brothers. All rights reserved.</p>
   </footer>
@@ -1387,6 +1477,8 @@
     <a href="#characters">MEET THE GUARDIANS</a><br>
     <a href="#story">READ THE ORIGIN</a><br>
     <a href="#mission">SEE THE MISSION</a><br>
+    <a href="#book">FEATURED BOOK</a><br>
+    <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>
 
@@ -1416,5 +1508,3 @@
 
 </body>
   </html>
-https://www.amazon.com.au/dp/1764387406?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&ref_=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&social_share=cm_sw_r_ffobk_cso_cp_mwn_dp_RZQTHMSSD4SAKFM02MST&bestFormat=true
-www.linkedin.com/in/forgebrothers

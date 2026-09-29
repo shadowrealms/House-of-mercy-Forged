@@ -33,7 +33,7 @@
       --border-bright: rgba(201,168,76,0.5);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 
     body {
       background: var(--dark);
@@ -41,6 +41,8 @@
       font-family: 'Lato', sans-serif;
       font-weight: 300;
       overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
     }
 
     body::before {
@@ -939,6 +941,20 @@
       .lumin-panel { right: 16px; bottom: 72px; }
       .poster-card { min-height: 360px; }
     }
+  
+    img, video { max-width: 100%; height: auto; }
+    @media (max-width: 760px) {
+      nav { padding: 16px 18px; }
+      .nav-links { display: none; }
+      .nav-logo { font-size: 11px; letter-spacing: .14em; }
+      .nav-cta { padding: 9px 12px; font-size: 10px; }
+      .story, .characters, .how, .poster, .contact-section, .privacy-section, .book-section, .youtube-section { padding-left: 16px; padding-right: 16px; width: 100%; }
+      .fashion-grid, .poster-grid, .characters-grid { grid-template-columns: minmax(0, 1fr); }
+      .book-box, .contact-box, .privacy-box, .youtube-box { padding: 24px 16px; width: 100%; overflow: hidden; }
+      .flow-item { grid-template-columns: 46px minmax(0,1fr); gap: 16px; }
+      .lumin-panel { left: 12px !important; right: 12px !important; bottom: 78px !important; width: auto !important; max-width: none !important; }
+      .lumin-button { right: 14px !important; bottom: 14px !important; }
+    }
   </style>
 </head>
 
@@ -1119,9 +1135,9 @@
           <div class="flow-line"></div>
         </div>
         <div class="flow-content">
-          <div class="flow-title">Merchandise</div>
+          <div class="flow-title">Story Into Action</div>
           <p class="flow-desc">
-            Every hoodie, jacket, dress, and design carries more than style — it carries witness. Each piece helps fund a vision where creativity becomes provision, and where story is transformed into practical care for real people.
+            Every story carries more than imagination — it carries purpose. Through The Forged Saga, creativity becomes a way to support practical compassion, dignity, food, shelter, and hope for real people.
           </p>
         </div>
       </div>
@@ -1204,12 +1220,8 @@
 
     <div class="book-box reveal">
       <div class="fashion-grid" style="align-items:center; margin-top:0;">
-        <div class="fashion-card" style="min-height:360px; display:flex; align-items:center; justify-content:center; text-align:center;">
-          <div>
-            <span class="section-eyebrow">Artwork Coming</span>
-            <p style="font-family:'Cormorant Garamond', serif; font-size:34px; color:var(--cream); line-height:1.15;">Forged of the <em style="color:var(--gold);">Realms</em></p>
-            <p style="margin-top:14px;">Official cover artwork will appear here.</p>
-          </div>
+        <div class="fashion-card">
+          <img src="Cover.jpg" alt="Forged of the Realms by George Eagles">
         </div>
 
         <div class="fashion-card" style="display:flex; flex-direction:column; justify-content:center;">
@@ -1226,14 +1238,22 @@
       </div>
     </div>
 
+    <div class="reveal" style="margin-top:32px;">
+      <img src="Storyboard.png" alt="Forged of the Realms cinematic storyboard" class="section-image" style="max-width:980px; margin-top:0;">
+      <p class="media-caption">A glimpse into the worlds, battles, sacrifice and hope of Forged of the Realms.</p>
+    </div>
+
+    <div class="video-wrap reveal">
+      <video controls playsinline preload="metadata" poster="Cover.jpg">
+        <source src="Forged.mp4" type="video/mp4">
+      </video>
+      <p class="media-caption">Forged of the Realms — official cinematic clip.</p>
+    </div>
+
     <div class="book-box reveal" style="margin-top:28px;">
       <div class="fashion-grid" style="align-items:center; margin-top:0;">
-        <div class="fashion-card" style="min-height:300px; display:flex; align-items:center; justify-content:center; text-align:center;">
-          <div>
-            <span class="section-eyebrow">Coming Soon</span>
-            <p style="font-family:'Cormorant Garamond', serif; font-size:34px; color:var(--cream); line-height:1.15;">Forged of <em style="color:var(--gold);">Faith</em></p>
-            <p style="margin-top:14px;">Official artwork will appear here.</p>
-          </div>
+        <div class="fashion-card">
+          <img src="Forged.png" alt="Forged of Faith — Love Has No Race — coming soon">
         </div>
         <div class="fashion-card" style="display:flex; flex-direction:column; justify-content:center;">
           <p style="font-family:'Cinzel', serif; color:var(--gold); font-size:13px; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:14px; text-align:left;">Coming Soon</p>

@@ -970,6 +970,7 @@
       <li><a href="#forged-trial">Forged Trial</a></li>
       <li><a href="#dragon-run">Dragon Run</a></li>
       <li><a href="#forged-mahjong">Mahjong</a></li>
+      <li><a href="#community-stories">Community</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
@@ -1352,6 +1353,43 @@
     </div>
   </section>
 
+  <section class="book-section" id="community-stories">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Your Voice Matters</span>
+      <h2 class="section-title">House of Mercy <em>Community Stories</em></h2>
+      <p class="section-desc">A place to talk about the books, share reviews, discuss characters and themes, and tell stories of hope, mercy, faith and second chances.</p>
+    </div>
+    <div class="book-box reveal">
+      <div class="fashion-grid">
+        <div class="fashion-card">
+          <div style="font-size:42px;margin-bottom:12px;">📚</div>
+          <h3>Book Reviews & Discussion</h3>
+          <p>Read a Forged book? Tell the community what stayed with you. Discuss the story, characters, realms, themes and moments that meant something to you — without attacking other readers for seeing things differently.</p>
+        </div>
+        <div class="fashion-card">
+          <div style="font-size:42px;margin-bottom:12px;">🕯️</div>
+          <h3>Stories of Hope</h3>
+          <p>Share something that may help another person keep going: mercy received, a second chance, recovery, kindness, faith, or a moment when someone simply showed up.</p>
+        </div>
+      </div>
+      <div style="max-width:760px;margin:34px auto 0;">
+        <h3 style="text-align:center;">Write Your Story</h3>
+        <p style="text-align:center;">Submissions are reviewed before publication. Please do not include private contact details or information about another person without their permission.</p>
+        <form id="communityForm" style="display:grid;gap:12px;margin-top:20px;">
+          <input id="communityName" maxlength="60" required placeholder="Your name or display name" aria-label="Your name or display name" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <select id="communityCategory" aria-label="Category" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+            <option>Book Review</option><option>Forged Discussion</option><option>Hope</option><option>Mercy</option><option>Faith</option><option>Second Chances</option><option>Mental Health & Encouragement</option><option>House of Mercy</option>
+          </select>
+          <input id="communityTitle" maxlength="100" required placeholder="Title" aria-label="Post title" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <textarea id="communityBody" maxlength="5000" required rows="9" placeholder="Write your review, discussion or story..." aria-label="Your story" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
+          <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;"><input id="communityAgree" type="checkbox" required style="margin-top:4px;"> <span>I understand my submission may be edited for spelling or safety and will only be published after review. I will not submit abuse, threats, private information, or content that belongs to someone else.</span></label>
+          <button class="btn-primary" type="submit">SUBMIT FOR REVIEW</button>
+          <p id="communityStatus" aria-live="polite" style="text-align:center;margin:0;color:var(--cream-dim);"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <section class="youtube-section" id="youtube">
     <div class="section-header reveal">
       <span class="section-eyebrow">Watch the Message</span>
@@ -1482,6 +1520,7 @@
     <a href="#forged-trial">ENTER THE FORGED TRIAL</a><br>
     <a href="#dragon-run">PLAY DRAGON RUN</a><br>
     <a href="#forged-mahjong">PLAY FORGED MAHJONG</a><br>
+    <a href="#community-stories">COMMUNITY STORIES & REVIEWS</a><br>
     <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>
@@ -1644,6 +1683,24 @@
         }
       }
       document.getElementById('mjNew').addEventListener('click',newRealm);newRealm();
+    })();
+
+
+    // Community Stories submission — opens a review email for the visitor to send.
+    (() => {
+      const form=document.getElementById('communityForm'); if(!form)return;
+      form.addEventListener('submit',e=>{
+        e.preventDefault();
+        const name=document.getElementById('communityName').value.trim();
+        const category=document.getElementById('communityCategory').value;
+        const title=document.getElementById('communityTitle').value.trim();
+        const body=document.getElementById('communityBody').value.trim();
+        if(!name||!title||!body||!document.getElementById('communityAgree').checked)return;
+        const subject='Community Story Submission — '+category+' — '+title;
+        const text='HOUSE OF MERCY COMMUNITY SUBMISSION\n\nDisplay name: '+name+'\nCategory: '+category+'\nTitle: '+title+'\n\n'+body+'\n\nSubmitted for review before publication.';
+        document.getElementById('communityStatus').textContent='Your email app will open. Send the message to complete your submission for review.';
+        window.location.href='mailto:gumworld1976@yahoo.com.au?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
+      });
     })();
 
     function toggleLumin() {

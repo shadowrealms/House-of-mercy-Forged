@@ -968,6 +968,7 @@
       <li><a href="#mission">Mission</a></li>
       <li><a href="#book">Books</a></li>
       <li><a href="#forged-trial">Forged Trial</a></li>
+      <li><a href="#dragon-run">Dragon Run</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
@@ -1313,6 +1314,27 @@
     </div>
   </section>
 
+  <section class="book-section" id="dragon-run">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Play the Forged Realm</span>
+      <h2 class="section-title">Forged: <em>Dragon Run</em></h2>
+    </div>
+    <div class="book-box reveal" style="text-align:center;overflow:hidden;">
+      <p style="max-width:720px;margin:0 auto 20px;">Collect the crystals. Dodge the dragon fire. Survive the realm.</p>
+      <div id="runHud" style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px;font-family:'Cinzel',serif;color:var(--gold);">
+        <span>Crystals: <b id="runScore">0</b></span><span>Lives: <b id="runLives">3</b></span><span>Best: <b id="runBest">0</b></span>
+      </div>
+      <canvas id="dragonRun" width="760" height="360" aria-label="Forged Dragon Run game" style="width:100%;max-width:760px;aspect-ratio:19/9;border:1px solid var(--border-bright);background:linear-gradient(#17120d,#080604);touch-action:none;"></canvas>
+      <p id="runMessage" aria-live="polite" style="margin:14px auto;color:var(--cream-dim);font-style:italic;">✦ Lumin: “Ready, traveller? Collect the light. Avoid the fire.”</p>
+      <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+        <button type="button" class="btn-secondary" id="runLeft" aria-label="Move left">◀ LEFT</button>
+        <button type="button" class="btn-primary" id="runStart">PLAY</button>
+        <button type="button" class="btn-secondary" id="runRight" aria-label="Move right">RIGHT ▶</button>
+      </div>
+      <p style="font-size:13px;margin-top:14px;">Phone: hold LEFT or RIGHT. Computer: use ← and →.</p>
+    </div>
+  </section>
+
   <section class="youtube-section" id="youtube">
     <div class="section-header reveal">
       <span class="section-eyebrow">Watch the Message</span>
@@ -1441,6 +1463,7 @@
     <a href="#mission">SEE THE MISSION</a><br>
     <a href="#book">BOOKS</a><br>
     <a href="#forged-trial">ENTER THE FORGED TRIAL</a><br>
+    <a href="#dragon-run">PLAY DRAGON RUN</a><br>
     <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>
@@ -1535,6 +1558,41 @@
       });
     }
     document.querySelectorAll('#trial-choices .trial-choice').forEach(b=>b.addEventListener('click',()=>{trialScores[b.dataset.path]++;renderTrialScene();}));
+
+
+    // Forged: Dragon Run
+    (() => {
+      const canvas=document.getElementById('dragonRun'); if(!canvas) return;
+      const ctx=canvas.getContext('2d'), scoreEl=document.getElementById('runScore'), livesEl=document.getElementById('runLives'), bestEl=document.getElementById('runBest'), msg=document.getElementById('runMessage');
+      let running=false, score=0, lives=3, best=0, last=0, spawn=0, keys={left:false,right:false}, items=[];
+      const hero={x:360,y:305,w:34,h:34,speed:280};
+      function reset(){score=0;lives=3;items=[];hero.x=363;scoreEl.textContent=score;livesEl.textContent=lives;msg.textContent='✦ Lumin: “The realm is open. Run!”';}
+      function start(){reset();running=true;last=performance.now();requestAnimationFrame(loop);}
+      function spawnItem(){
+        const crystal=Math.random()>.42;
+        items.push({x:18+Math.random()*(canvas.width-36),y:-28,w:24,h:24,vy:125+Math.random()*115,type:crystal?'crystal':'fire'});
+      }
+      function hit(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;}
+      function loop(t){if(!running)return;const dt=Math.min((t-last)/1000,.035);last=t;
+        if(keys.left)hero.x-=hero.speed*dt;if(keys.right)hero.x+=hero.speed*dt;hero.x=Math.max(0,Math.min(canvas.width-hero.w,hero.x));
+        spawn+=dt;if(spawn>.52){spawn=0;spawnItem();}
+        items.forEach(o=>o.y+=o.vy*dt);
+        for(let i=items.length-1;i>=0;i--){const o=items[i];if(hit(hero,o)){if(o.type==='crystal'){score++;scoreEl.textContent=score;if(score===5)msg.textContent='✦ Lumin: “Five crystals! The light is following you.”';if(score===10)msg.textContent='✦ Lumin: “Ten! Even Drago is watching now.”';}else{lives--;livesEl.textContent=lives;msg.textContent='✦ Lumin: “Fire! Keep moving, traveller.”';}items.splice(i,1);if(lives<=0){running=false;best=Math.max(best,score);bestEl.textContent=best;msg.textContent='✦ Lumin: “The realm remembers you. '+score+' crystals forged. Try again.”';draw();return;}}else if(o.y>canvas.height+30)items.splice(i,1);}
+        draw();requestAnimationFrame(loop);
+      }
+      function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);
+        const g=ctx.createLinearGradient(0,0,0,canvas.height);g.addColorStop(0,'#17120d');g.addColorStop(1,'#080604');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle='rgba(201,168,76,.18)';for(let x=20;x<canvas.width;x+=80)ctx.fillRect(x,270,1,90);
+        ctx.font='30px serif';ctx.fillText('🛡️',hero.x,hero.y+29);
+        items.forEach(o=>{ctx.font='27px serif';ctx.fillText(o.type==='crystal'?'💎':'🔥',o.x,o.y+24);});
+      }
+      function bindHold(id,key){const el=document.getElementById(id);const on=e=>{e.preventDefault();keys[key]=true;};const off=e=>{e.preventDefault();keys[key]=false;};el.addEventListener('pointerdown',on);el.addEventListener('pointerup',off);el.addEventListener('pointercancel',off);el.addEventListener('pointerleave',off);}
+      bindHold('runLeft','left');bindHold('runRight','right');
+      document.getElementById('runStart').addEventListener('click',start);
+      window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')keys.left=true;if(e.key==='ArrowRight')keys.right=true;});
+      window.addEventListener('keyup',e=>{if(e.key==='ArrowLeft')keys.left=false;if(e.key==='ArrowRight')keys.right=false;});
+      draw();
+    })();
 
     function toggleLumin() {
       const panel = document.getElementById('lumin-panel');

@@ -967,6 +967,7 @@
       <li><a href="#characters">Characters</a></li>
       <li><a href="#mission">Mission</a></li>
       <li><a href="#book">Books</a></li>
+      <li><a href="#forged-trial">Forged Trial</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
@@ -1266,6 +1267,24 @@
     </div>
   </section>
 
+  <section class="book-section" id="forged-trial">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Enter the Forged Realm</span>
+      <h2 class="section-title">The <em>Forged Trial</em></h2>
+    </div>
+    <div class="book-box reveal" id="trial-box" style="text-align:center;">
+      <p id="trial-kicker" style="font-family:'Cinzel',serif;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px;">Lumin's Challenge</p>
+      <p id="trial-text" style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);line-height:1.35;color:var(--cream);max-width:760px;margin:0 auto 28px;">Traveller, the realm is calling. Four paths stand before you. What will guide your first step?</p>
+      <div id="trial-choices" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-secondary trial-choice" data-path="mercy" type="button">Mercy</button>
+        <button class="btn-secondary trial-choice" data-path="grace" type="button">Grace</button>
+        <button class="btn-secondary trial-choice" data-path="hope" type="button">Hope</button>
+        <button class="btn-secondary trial-choice" data-path="faith" type="button">Faith</button>
+      </div>
+      <p id="trial-lumin" aria-live="polite" style="margin:30px auto 0;max-width:700px;color:var(--cream-dim);font-style:italic;line-height:1.8;">✦ Lumin: “Choose carefully, traveller. Power is not always found in the sword.”</p>
+    </div>
+  </section>
+
   <section class="youtube-section" id="youtube">
     <div class="section-header reveal">
       <span class="section-eyebrow">Watch the Message</span>
@@ -1393,6 +1412,7 @@
     <a href="#story">READ THE ORIGIN</a><br>
     <a href="#mission">SEE THE MISSION</a><br>
     <a href="#book">BOOKS</a><br>
+    <a href="#forged-trial">ENTER THE FORGED TRIAL</a><br>
     <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>
@@ -1414,6 +1434,79 @@
     }, { threshold: 0.1 });
 
     reveals.forEach(el => observer.observe(el));
+
+
+    const trialText = document.getElementById('trial-text');
+    const trialChoices = document.getElementById('trial-choices');
+    const trialLumin = document.getElementById('trial-lumin');
+    const trialScores = { mercy:0, grace:0, hope:0, faith:0 };
+    let trialRound = 0;
+    const trialScenes = [
+      {
+        text: 'Beyond the gate, a wounded stranger lies beside the road while a dragon circles above. What do you do?',
+        choices: [
+          ['Kneel beside the stranger','mercy'], ['Calm their fear','grace'],
+          ['Help them stand','hope'], ['Face the unknown path','faith']
+        ],
+        lumin: '✦ Lumin: “The first test is not strength. It is what you do when another life is placed before you.”'
+      },
+      {
+        text: 'At the river, an ancient crystal burns beneath the water. A voice warns that taking it may cost you something precious. What guides you?',
+        choices: [
+          ['Protect the others first','mercy'], ['Seek wisdom before acting','grace'],
+          ['Believe there is another way','hope'], ['Step into the river','faith']
+        ],
+        lumin: '✦ Lumin: “Every gift has a weight, brother. The question is what you are willing to carry for others.”'
+      },
+      {
+        text: 'The realm darkens. Your companions are afraid and the road home has vanished. What do you carry into the night?',
+        choices: [
+          ['Compassion','mercy'], ['Forgiveness','grace'],
+          ['A reason to keep going','hope'], ['Trust beyond what I can see','faith']
+        ],
+        lumin: '✦ Lumin: “This is the final forging. Not who you were when the road was easy — who you become when the light disappears.”'
+      }
+    ];
+    function renderTrialScene() {
+      const scene=trialScenes[trialRound];
+      trialText.textContent=scene.text;
+      trialLumin.textContent=scene.lumin;
+      trialChoices.innerHTML='';
+      scene.choices.forEach(([label,path])=>{
+        const b=document.createElement('button');
+        b.type='button'; b.className='btn-secondary trial-choice'; b.textContent=label;
+        b.addEventListener('click',()=>chooseTrial(path));
+        trialChoices.appendChild(b);
+      });
+    }
+    function chooseTrial(path) {
+      trialScores[path]++;
+      if(trialRound<trialScenes.length){ if(trialRound<trialScenes.length-1){trialRound++;renderTrialScene();return;} }
+      const order=['mercy','grace','hope','faith'];
+      const winner=order.reduce((a,b)=>trialScores[b]>trialScores[a]?b:a);
+      const endings={
+        mercy:['FORGED OF MERCY','You chose to see the person before the battle. Your strength is compassion in motion.'],
+        grace:['FORGED OF GRACE','You carried restoration into places ruled by fear. Your strength is making room for healing.'],
+        hope:['FORGED OF HOPE','When the road disappeared, you still looked for dawn. Your strength is helping others rise.'],
+        faith:['FORGED OF FAITH','You stepped forward without needing to see the whole road. Your strength is trust when certainty ends.']
+      };
+      trialText.innerHTML='<span style="color:var(--gold)">'+endings[winner][0]+'</span><br><span style="font-size:.65em">'+endings[winner][1]+'</span>';
+      trialLumin.textContent='✦ Lumin: “The realm does not choose who you are. Your choices reveal what was already being forged within you.”';
+      trialChoices.innerHTML='';
+      const r=document.createElement('button'); r.type='button'; r.className='btn-primary'; r.textContent='Take the Trial Again';
+      r.addEventListener('click',resetTrial); trialChoices.appendChild(r);
+    }
+    function resetTrial(){
+      Object.keys(trialScores).forEach(k=>trialScores[k]=0); trialRound=0;
+      trialText.textContent='Traveller, the realm is calling. Four paths stand before you. What will guide your first step?';
+      trialLumin.textContent='✦ Lumin: “Choose carefully, traveller. Power is not always found in the sword.”';
+      trialChoices.innerHTML='';
+      [['Mercy','mercy'],['Grace','grace'],['Hope','hope'],['Faith','faith']].forEach(([label,path])=>{
+        const b=document.createElement('button'); b.type='button'; b.className='btn-secondary trial-choice'; b.textContent=label;
+        b.addEventListener('click',()=>{trialScores[path]++;renderTrialScene();}); trialChoices.appendChild(b);
+      });
+    }
+    document.querySelectorAll('#trial-choices .trial-choice').forEach(b=>b.addEventListener('click',()=>{trialScores[b.dataset.path]++;renderTrialScene();}));
 
     function toggleLumin() {
       const panel = document.getElementById('lumin-panel');

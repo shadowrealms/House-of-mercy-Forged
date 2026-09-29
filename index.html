@@ -969,6 +969,7 @@
       <li><a href="#book">Books</a></li>
       <li><a href="#forged-trial">Forged Trial</a></li>
       <li><a href="#dragon-run">Dragon Run</a></li>
+      <li><a href="#forged-mahjong">Mahjong</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#privacy">Privacy</a></li>
@@ -1335,6 +1336,22 @@
     </div>
   </section>
 
+  <section class="book-section" id="forged-mahjong">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Seven Realms</span>
+      <h2 class="section-title">Forged <em>Mahjong</em></h2>
+    </div>
+    <div class="book-box reveal" style="text-align:center;overflow:hidden;">
+      <p style="max-width:720px;margin:0 auto 12px;">Match two identical Forged tiles and clear the realm. No betting, no stakes — just a little Forged challenge.</p>
+      <div style="display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin:18px 0;font-family:'Cinzel',serif;color:var(--gold);">
+        <span>Pairs: <b id="mjPairs">0</b>/12</span><span>Moves: <b id="mjMoves">0</b></span>
+      </div>
+      <div id="mjBoard" aria-label="Forged Mahjong matching board" style="display:grid;grid-template-columns:repeat(6,minmax(42px,1fr));gap:8px;max-width:660px;margin:0 auto;"></div>
+      <p id="mjMessage" aria-live="polite" style="margin:18px auto;color:var(--cream-dim);font-style:italic;">✦ Lumin: “Find the matching symbols and restore the realm.”</p>
+      <button type="button" class="btn-primary" id="mjNew">NEW REALM</button>
+    </div>
+  </section>
+
   <section class="youtube-section" id="youtube">
     <div class="section-header reveal">
       <span class="section-eyebrow">Watch the Message</span>
@@ -1464,6 +1481,7 @@
     <a href="#book">BOOKS</a><br>
     <a href="#forged-trial">ENTER THE FORGED TRIAL</a><br>
     <a href="#dragon-run">PLAY DRAGON RUN</a><br>
+    <a href="#forged-mahjong">PLAY FORGED MAHJONG</a><br>
     <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>
@@ -1592,6 +1610,40 @@
       window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')keys.left=true;if(e.key==='ArrowRight')keys.right=true;});
       window.addEventListener('keyup',e=>{if(e.key==='ArrowLeft')keys.left=false;if(e.key==='ArrowRight')keys.right=false;});
       draw();
+    })();
+
+
+    // Forged Mahjong — tile matching
+    (() => {
+      const board=document.getElementById('mjBoard'); if(!board)return;
+      const pairEl=document.getElementById('mjPairs'),moveEl=document.getElementById('mjMoves'),message=document.getElementById('mjMessage');
+      const symbols=['🐉','💎','🕊️','🌿','🕯️','🌅','⚔️','🔥','👑','🌙','🛡️','✨'];
+      let first=null,lock=false,pairs=0,moves=0;
+      function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+      function newRealm(){
+        board.innerHTML='';first=null;lock=false;pairs=0;moves=0;pairEl.textContent='0';moveEl.textContent='0';
+        message.textContent='✦ Lumin: “Find the matching symbols and restore the realm.”';
+        shuffle([...symbols,...symbols]).forEach((symbol,i)=>{
+          const b=document.createElement('button');b.type='button';b.dataset.symbol=symbol;b.dataset.open='0';b.setAttribute('aria-label','Hidden Forged tile');
+          b.textContent='✦';b.style.cssText="min-width:0;aspect-ratio:1/1;border:1px solid var(--gold-dim);background:#17130d;color:var(--gold);font-size:clamp(22px,5vw,34px);border-radius:5px;cursor:pointer;touch-action:manipulation;";
+          b.addEventListener('click',()=>pick(b));board.appendChild(b);
+        });
+      }
+      function pick(b){
+        if(lock||b.dataset.open==='1'||b.dataset.matched==='1')return;
+        b.dataset.open='1';b.textContent=b.dataset.symbol;b.style.borderColor='var(--gold-light)';b.style.background='#211b10';
+        if(!first){first=b;return;}
+        moves++;moveEl.textContent=moves;
+        if(first.dataset.symbol===b.dataset.symbol){
+          first.dataset.matched=b.dataset.matched='1';first.style.opacity=b.style.opacity='.45';first=null;pairs++;pairEl.textContent=pairs;
+          if(pairs===12){message.textContent='✦ Lumin: “The realm is restored. Nothing forged in mercy is ever truly lost.”';}
+          else if(pairs===6){message.textContent='✦ Lumin: “Half the realm is restored. Keep going, traveller.”';}
+        }else{
+          lock=true;const a=first;first=null;
+          setTimeout(()=>{[a,b].forEach(x=>{x.dataset.open='0';x.textContent='✦';x.style.borderColor='var(--gold-dim)';x.style.background='#17130d';});lock=false;},650);
+        }
+      }
+      document.getElementById('mjNew').addEventListener('click',newRealm);newRealm();
     })();
 
     function toggleLumin() {

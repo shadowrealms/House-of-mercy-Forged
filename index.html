@@ -970,6 +970,7 @@
       <li><a href="#forged-trial">Forged Trial</a></li>
       <li><a href="#dragon-run">Dragon Run</a></li>
       <li><a href="#forged-mahjong">Mahjong</a></li>
+      <li><a href="#forged-community">Profiles</a></li>
       <li><a href="#community-stories">Community</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -1359,6 +1360,43 @@
     </div>
   </section>
 
+  <section class="book-section" id="forged-community">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Enter the Community</span>
+      <h2 class="section-title">My <em>Forged Profile</em></h2>
+      <p class="section-desc">Choose your identity in the Forged universe, tell us what the stories mean to you, and build your own little corner of the realm.</p>
+    </div>
+    <div class="book-box reveal">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:start;">
+        <form id="forgedProfileForm" style="display:grid;gap:12px;">
+          <input id="profileName" maxlength="40" placeholder="Your display name" aria-label="Display name" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <select id="profileGuardian" aria-label="Choose your Guardian" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+            <option>Mercy 🕊️</option><option>Grace 🌿</option><option>Hope 🌅</option><option>Faith ✨</option><option>Mika 🕯️</option><option>Dragon 🐉</option>
+          </select>
+          <select id="profileRealm" aria-label="Choose your realm" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+            <option>The Realm of Mercy</option><option>The Dragon Realm</option><option>The Realm of Hope</option><option>The Realm of Faith</option><option>The Seven Realms</option><option>House of Mercy</option>
+          </select>
+          <input id="profileCharacter" maxlength="40" placeholder="Favourite Forged character" aria-label="Favourite Forged character" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <textarea id="profileJourney" maxlength="320" rows="5" placeholder="My Forged Journey — what brought you here?" aria-label="My Forged Journey" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
+          <button type="submit" class="btn-primary">FORGE MY PROFILE</button>
+          <p style="font-size:12px;color:var(--cream-dim);margin:0;">For now, your profile is saved only on this device. Public accounts and community profiles will come with the next stage.</p>
+        </form>
+        <div id="forgedProfileCard" style="min-height:360px;padding:30px;border:1px solid var(--border-bright);background:linear-gradient(145deg,#17130d,#0d0a07);text-align:center;box-shadow:0 18px 45px rgba(0,0,0,.28);">
+          <div id="profileSigil" style="font-size:58px;margin-bottom:12px;">🐉</div>
+          <span class="section-eyebrow" style="margin-bottom:10px;">Forged Community Member</span>
+          <h3 id="profilePreviewName" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--cream);">Traveller</h3>
+          <p id="profilePreviewGuardian" style="color:var(--gold);font-family:'Cinzel',serif;margin:8px 0;">Dragon 🐉</p>
+          <p id="profilePreviewRealm" style="font-style:italic;color:var(--cream-dim);">The Seven Realms</p>
+          <div style="height:1px;background:var(--border);margin:22px 0;"></div>
+          <p id="profilePreviewCharacter"><strong>Favourite:</strong> Choose a character</p>
+          <p id="profilePreviewJourney" style="line-height:1.7;color:var(--cream-dim);margin-top:16px;">“Every journey into the realms begins with a first step.”</p>
+          <div style="margin-top:22px;font-size:25px;letter-spacing:8px;" title="Founding community badges">💎 🛡️ 🔥</div>
+          <p style="font-size:11px;color:var(--gold-dim);margin-top:8px;">FOUNDING TRAVELLER · CRYSTAL SEEKER · REALM EXPLORER</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="book-section" id="community-stories">
     <div class="section-header reveal">
       <span class="section-eyebrow">Your Voice Matters</span>
@@ -1692,7 +1730,31 @@
     })();
 
 
-    // Community Stories submission — opens a review email for the visitor to send.
+
+    // Forged profile — local first-stage community identity.
+    (() => {
+      const form=document.getElementById('forgedProfileForm'); if(!form)return;
+      const sigils={'Mercy 🕊️':'🕊️','Grace 🌿':'🌿','Hope 🌅':'🌅','Faith ✨':'✨','Mika 🕯️':'🕯️','Dragon 🐉':'🐉'};
+      const ids=['profileName','profileGuardian','profileRealm','profileCharacter','profileJourney'];
+      const render=()=>{
+        const name=document.getElementById('profileName').value.trim()||'Traveller';
+        const guardian=document.getElementById('profileGuardian').value;
+        const realm=document.getElementById('profileRealm').value;
+        const character=document.getElementById('profileCharacter').value.trim()||'Choose a character';
+        const journey=document.getElementById('profileJourney').value.trim()||'Every journey into the realms begins with a first step.';
+        document.getElementById('profileSigil').textContent=sigils[guardian]||'🐉';
+        document.getElementById('profilePreviewName').textContent=name;
+        document.getElementById('profilePreviewGuardian').textContent=guardian;
+        document.getElementById('profilePreviewRealm').textContent=realm;
+        document.getElementById('profilePreviewCharacter').innerHTML='<strong>Favourite:</strong> '+character.replace(/[<>&]/g,s=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]));
+        document.getElementById('profilePreviewJourney').textContent='“'+journey+'”';
+      };
+      try{const saved=JSON.parse(localStorage.getItem('forgedProfile')||'null');if(saved)ids.forEach(id=>{if(saved[id]!=null)document.getElementById(id).value=saved[id];});}catch(e){}
+      render(); ids.forEach(id=>document.getElementById(id).addEventListener('input',render));
+      form.addEventListener('submit',e=>{e.preventDefault();const data={};ids.forEach(id=>data[id]=document.getElementById(id).value);try{localStorage.setItem('forgedProfile',JSON.stringify(data));}catch(e){}render();});
+    })();
+
+        // Community Stories submission — opens a review email for the visitor to send.
     (() => {
       const form=document.getElementById('communityForm'); if(!form)return;
       form.addEventListener('submit',e=>{

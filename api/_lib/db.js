@@ -7,5 +7,8 @@ CREATE TABLE IF NOT EXISTS forged_comments (id bigserial PRIMARY KEY, post_id bi
 CREATE INDEX IF NOT EXISTS forged_comments_post_idx ON forged_comments(post_id,created_at);
 CREATE TABLE IF NOT EXISTS forged_reports (id bigserial PRIMARY KEY, reporter_hash text NOT NULL, post_id bigint REFERENCES forged_posts(id) ON DELETE CASCADE, comment_id bigint REFERENCES forged_comments(id) ON DELETE CASCADE, reason varchar(80) NOT NULL, details varchar(400), status varchar(20) NOT NULL DEFAULT 'open', created_at timestamptz DEFAULT now());
 CREATE INDEX IF NOT EXISTS forged_reports_status_idx ON forged_reports(status,created_at DESC);
+CREATE TABLE IF NOT EXISTS forged_messages (id bigserial PRIMARY KEY, sender_hash text NOT NULL, recipient_hash text NOT NULL, body varchar(1000) NOT NULL, status varchar(20) NOT NULL DEFAULT 'active', created_at timestamptz DEFAULT now(), read_at timestamptz);
+CREATE INDEX IF NOT EXISTS forged_messages_pair_idx ON forged_messages(sender_hash,recipient_hash,created_at);
+CREATE INDEX IF NOT EXISTS forged_messages_recipient_idx ON forged_messages(recipient_hash,created_at DESC);
 CREATE TABLE IF NOT EXISTS forged_blocks (blocker_hash text NOT NULL, blocked_hash text NOT NULL, created_at timestamptz DEFAULT now(), PRIMARY KEY(blocker_hash,blocked_hash));`);return p}
 module.exports={init};

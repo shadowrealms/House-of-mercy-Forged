@@ -1334,7 +1334,7 @@
           <input id="profileCharacter" maxlength="40" placeholder="Favourite Forged character" aria-label="Favourite Forged character" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
           <textarea id="profileJourney" maxlength="320" rows="5" placeholder="My Forged Journey — what brought you here?" aria-label="My Forged Journey" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
           <button type="submit" class="btn-primary">FORGE MY PROFILE</button>
-          <p style="font-size:12px;color:var(--cream-dim);margin:0;">Created instantly — no email approval. Your profile is saved privately on this device for now.</p>
+          <p id="profileSaveNote" style="font-size:12px;color:var(--cream-dim);margin:0;">Signed-in members can now save this profile to the shared Forged Community.</p>
         </form>
         <div id="forgedProfileCard" style="min-height:360px;padding:30px;border:1px solid var(--border-bright);background:linear-gradient(145deg,#17130d,#0d0a07);text-align:center;box-shadow:0 18px 45px rgba(0,0,0,.28);">
           <div id="profileSigil" style="font-size:58px;margin-bottom:12px;">🐉</div>
@@ -1875,6 +1875,13 @@
  async function refresh(){try{const r=await fetch('/api/auth/session',{credentials:'same-origin'}),s=await r.json();if(s.authenticated){out.hidden=true;inside.hidden=false;identity.textContent='Signed in as '+s.user.email;}else{out.hidden=false;inside.hidden=true;}}catch{}}
  form&&form.addEventListener('submit',async e=>{e.preventDefault();const email=document.getElementById('memberEmail').value.trim();status.textContent='Sending your secure link…';try{const r=await fetch('/api/auth/request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});const d=await r.json();status.textContent=d.message||d.error||'Please try again.';}catch{status.textContent='Sign-in is temporarily unavailable. Please try again.';}});
  refresh();
+})();
+</script>
+<script>
+(function persistentForgedProfile(){
+ const form=document.getElementById('forgedProfileForm'),note=document.getElementById('profileSaveNote');if(!form)return;
+ fetch('/api/community/profile').then(r=>r.ok?r.json():null).then(d=>{if(!d||!d.profile)return;const p=d.profile;document.getElementById('profileName').value=p.display_name||'';document.getElementById('profileGuardian').value=p.guardian||'Dragon 🐉';document.getElementById('profileRealm').value=p.realm||'The Seven Realms';document.getElementById('profileCharacter').value=p.favourite||'';document.getElementById('profileJourney').value=p.journey||'';form.dispatchEvent(new Event('input',{bubbles:true}));if(note)note.textContent='Your shared Forged profile is loaded.';}).catch(()=>{});
+ form.addEventListener('submit',async()=>{const payload={displayName:document.getElementById('profileName').value,guardian:document.getElementById('profileGuardian').value,realm:document.getElementById('profileRealm').value,favourite:document.getElementById('profileCharacter').value,journey:document.getElementById('profileJourney').value};try{const r=await fetch('/api/community/profile',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(note)note.textContent=r.ok?'🔥 Profile saved to the Forged Community.':(d.error||'Sign in above to save your shared profile.')}catch{if(note)note.textContent='Could not save the shared profile yet.'}});
 })();
 </script>
 </body>

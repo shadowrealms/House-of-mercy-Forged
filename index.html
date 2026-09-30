@@ -1484,7 +1484,7 @@
       </div>
       <form id="communityForm" class="post-composer">
         <div class="composer-fields">
-          <input id="communityName" class="community-input" maxlength="40" required placeholder="Your display name" aria-label="Your display name">
+          <input id="communityName" class="community-input" maxlength="40" placeholder="Your display name comes from your Forged profile" aria-label="Your display name" disabled>
           <select id="communityCategory" class="community-input" aria-label="Post category">
             <option>Book Discussion</option><option>Fan Creations</option><option>Hope &amp; Mercy</option><option>Review</option><option>Question for Readers</option>
           </select>
@@ -1495,9 +1495,9 @@
         <video id="communityVideoPreview" class="media-preview" controls aria-label="Selected video preview"></video>
         <div class="composer-actions">
           <label class="media-picker">Add photo or video <input id="communityMedia" type="file" accept="image/*,video/*" aria-label="Add a photo or video"></label>
-          <button class="btn-primary" type="submit">SAVE POST DRAFT</button>
+          <button class="btn-primary" type="submit">PUBLISH TO COMMUNITY</button>
         </div>
-        <p id="communityStatus" class="board-notice" aria-live="polite">Posts are saved only on this device until the secure public community is connected.</p>
+        <p id="communityStatus" class="board-notice" aria-live="polite">Sign in and create your Forged profile to publish. Posts are shared with the reader community.</p>
       </form>
       <div id="communityFeed" aria-live="polite"></div>
     </div>
@@ -1824,21 +1824,21 @@
     })();
 
     
-    // Community board: drafts remain in this browser until a server-backed community is connected.
+    // Shared Forged Community board.
     (() => {
-      const form=document.getElementById('communityForm'); const feed=document.getElementById('communityFeed');
-      const media=document.getElementById('communityMedia'); const imagePreview=document.getElementById('communityImagePreview');
-      const videoPreview=document.getElementById('communityVideoPreview'); const status=document.getElementById('communityStatus');
+      const form=document.getElementById('communityForm'),feed=document.getElementById('communityFeed'),status=document.getElementById('communityStatus');
+      const media=document.getElementById('communityMedia'),imagePreview=document.getElementById('communityImagePreview'),videoPreview=document.getElementById('communityVideoPreview');
       if(!form||!feed)return;
-      const storageKey='forgedCommunityDrafts'; let filter='All'; let mediaUrl='';
-      const read=()=>{ try { return JSON.parse(localStorage.getItem(storageKey)||'[]'); } catch { return []; } };
-      const escape=value=>String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-      const render=()=>{ const posts=read().filter(post=>filter==='All'||post.category===filter); feed.innerHTML=posts.map((post,index)=>`<article class="feed-card"><div class="feed-card-head"><div class="feed-avatar">${escape(post.name).slice(0,1).toUpperCase()}</div><div><p class="feed-author">${escape(post.name)}</p><p class="feed-meta">${escape(post.category)} · Reader community</p></div></div><h3>${escape(post.title)}</h3><p>${escape(post.body)}</p><div class="feed-actions"><button class="feed-action" type="button" data-like="${index}">APPRECIATE <span>${post.likes||0}</span></button><button class="feed-action" type="button">REPLY <span>${post.comments||0}</span></button><button class="feed-action" type="button">SHARE</button></div></article>`).join('')||'<p class="board-notice">No posts in this category yet.</p>'; };
-      media.addEventListener('change',()=>{ const file=media.files&&media.files[0]; imagePreview.style.display='none'; videoPreview.style.display='none'; if(mediaUrl)URL.revokeObjectURL(mediaUrl); if(!file){mediaUrl='';return;} mediaUrl=URL.createObjectURL(file); const preview=file.type.startsWith('video/')?videoPreview:imagePreview;preview.src=mediaUrl;preview.style.display='block'; });
-      form.addEventListener('submit',event=>{event.preventDefault();const name=document.getElementById('communityName').value.trim();const category=document.getElementById('communityCategory').value;const title=document.getElementById('communityTitle').value.trim();const body=document.getElementById('communityBody').value.trim();if(!name||!title||!body)return;const posts=read();posts.unshift({name,category,title,body,likes:0,comments:0});try{localStorage.setItem(storageKey,JSON.stringify(posts.slice(0,30)));}catch{status.textContent='This browser cannot save a post draft. Please enable browser storage and try again.';return;}form.reset();if(mediaUrl)URL.revokeObjectURL(mediaUrl);mediaUrl='';imagePreview.style.display='none';videoPreview.style.display='none';status.textContent='Text draft saved on this device. Photo and video publishing will be enabled when secure community storage is connected.';render();});
-      document.querySelectorAll('[data-feed-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.feedFilter;document.querySelectorAll('[data-feed-filter]').forEach(item=>item.classList.toggle('active',item===button));render();}));
-      feed.addEventListener('click',event=>{const button=event.target.closest('[data-like]');if(!button)return;button.classList.toggle('active');const count=button.querySelector('span');count.textContent=Number(count.textContent)+(button.classList.contains('active')?1:-1);});
-      render();
+      let filter='All',mediaUrl='',posts=[];
+      const escape=v=>String(v??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]));
+      const render=()=>{const shown=posts.filter(p=>filter==='All'||p.category===filter);feed.innerHTML=shown.map(p=>`<article class="feed-card"><div class="feed-card-head"><div class="feed-avatar">${escape(p.display_name).slice(0,1).toUpperCase()}</div><div><p class="feed-author">${escape(p.display_name)}</p><p class="feed-meta">${escape(p.category)} · ${new Date(p.created_at).toLocaleDateString()}</p></div></div><h3>${escape(p.title||p.category)}</h3><p>${escape(p.body)}</p><div class="feed-actions"><button class="feed-action" type="button" disabled>APPRECIATE</button><button class="feed-action" type="button" disabled>REPLY</button><button class="feed-action" type="button" data-share="${p.id}">SHARE</button></div></article>`).join('')||'<p class="board-notice">No posts in this category yet. Be the first to start the conversation.</p>'};
+      async function load(){try{const r=await fetch('/api/community/posts');const d=await r.json();if(r.ok){posts=d.posts||[];render()}else status.textContent=d.error||'Community feed is temporarily unavailable.'}catch{status.textContent='Community feed is temporarily unavailable.'}}
+      media&&media.addEventListener('change',()=>{const file=media.files&&media.files[0];imagePreview.style.display='none';videoPreview.style.display='none';if(mediaUrl)URL.revokeObjectURL(mediaUrl);if(!file){mediaUrl='';return}mediaUrl=URL.createObjectURL(file);const p=file.type.startsWith('video/')?videoPreview:imagePreview;p.src=mediaUrl;p.style.display='block';status.textContent='Preview ready. Media publishing will be enabled in the next secure upload stage.'});
+      form.addEventListener('submit',async e=>{e.preventDefault();const category=document.getElementById('communityCategory').value,title=document.getElementById('communityTitle').value.trim(),body=document.getElementById('communityBody').value.trim();if(!title||!body)return;status.textContent='Publishing…';try{const r=await fetch('/api/community/posts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category,body:title+'\n\n'+body})});const d=await r.json();if(!r.ok){status.textContent=d.error||'Could not publish.';return}form.reset();imagePreview.style.display='none';videoPreview.style.display='none';status.textContent='🔥 Published to the Forged Community.';await load()}catch{status.textContent='Could not publish right now.'}});
+      document.querySelectorAll('[data-feed-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.feedFilter;document.querySelectorAll('[data-feed-filter]').forEach(x=>x.classList.toggle('active',x===b));render()}));
+      feed.addEventListener('click',async e=>{const b=e.target.closest('[data-share]');if(!b)return;const url=location.origin+location.pathname+'#community-stories';try{await navigator.share({title:'The Forged Community',url})}catch{try{await navigator.clipboard.writeText(url);status.textContent='Community link copied.'}catch{}}});
+      fetch('/api/community/profile').then(r=>r.ok?r.json():null).then(d=>{if(d&&d.profile)document.getElementById('communityName').value=d.profile.display_name||''}).catch(()=>{});
+      load();
     })();
 
     function toggleLumin() {

@@ -1249,6 +1249,44 @@
       </div>
     </div>
 
+  <section class="book-section" id="forged-community">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Join Instantly</span>
+      <h2 class="section-title">Create Your <em>Forged Profile</em></h2>
+      <p class="section-desc">No approval. No waiting. Choose your Forged identity and create your profile instantly.</p>
+    </div>
+    <div class="book-box reveal">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:start;">
+        <form id="forgedProfileForm" style="display:grid;gap:12px;">
+          <input id="profileName" maxlength="40" placeholder="Your display name" aria-label="Display name" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <select id="profileGuardian" aria-label="Choose your Guardian" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+            <option>Mercy 🕊️</option><option>Grace 🌿</option><option>Hope 🌅</option><option>Faith ✨</option><option>Mika 🕯️</option><option>Dragon 🐉</option>
+          </select>
+          <select id="profileRealm" aria-label="Choose your realm" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+            <option>The Realm of Mercy</option><option>The Dragon Realm</option><option>The Realm of Hope</option><option>The Realm of Faith</option><option>The Seven Realms</option><option>House of Mercy</option>
+          </select>
+          <input id="profileCharacter" maxlength="40" placeholder="Favourite Forged character" aria-label="Favourite Forged character" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
+          <textarea id="profileJourney" maxlength="320" rows="5" placeholder="My Forged Journey — what brought you here?" aria-label="My Forged Journey" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
+          <button type="submit" class="btn-primary">FORGE MY PROFILE</button>
+          <p style="font-size:12px;color:var(--cream-dim);margin:0;">Created instantly — no email approval. Your profile is saved privately on this device for now.</p>
+        </form>
+        <div id="forgedProfileCard" style="min-height:360px;padding:30px;border:1px solid var(--border-bright);background:linear-gradient(145deg,#17130d,#0d0a07);text-align:center;box-shadow:0 18px 45px rgba(0,0,0,.28);">
+          <div id="profileSigil" style="font-size:58px;margin-bottom:12px;">🐉</div>
+          <span class="section-eyebrow" style="margin-bottom:10px;">Forged Community Member</span>
+          <h3 id="profilePreviewName" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--cream);">Traveller</h3>
+          <p id="profilePreviewGuardian" style="color:var(--gold);font-family:'Cinzel',serif;margin:8px 0;">Dragon 🐉</p>
+          <p id="profilePreviewRealm" style="font-style:italic;color:var(--cream-dim);">The Seven Realms</p>
+          <div style="height:1px;background:var(--border);margin:22px 0;"></div>
+          <p id="profilePreviewCharacter"><strong>Favourite:</strong> Choose a character</p>
+          <p id="profilePreviewJourney" style="line-height:1.7;color:var(--cream-dim);margin-top:16px;">“Every journey into the realms begins with a first step.”</p>
+          <div style="margin-top:22px;font-size:25px;letter-spacing:8px;" title="Founding community badges">💎 🛡️ 🔥</div>
+          <p style="font-size:11px;color:var(--gold-dim);margin-top:8px;">FOUNDING TRAVELLER · CRYSTAL SEEKER · REALM EXPLORER</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
     <div class="reveal" style="margin-top:32px;">
       <img src="Storyboard.png" alt="Forged of the Realms cinematic storyboard" class="section-image" style="max-width:980px; margin-top:0;">
       <p class="media-caption">A glimpse into the worlds, battles, sacrifice and hope of Forged of the Realms.</p>
@@ -1357,43 +1395,6 @@
       <div id="mjBoard" aria-label="Forged Mahjong matching board" style="display:grid;grid-template-columns:repeat(6,minmax(42px,1fr));gap:8px;max-width:660px;margin:0 auto;"></div>
       <p id="mjMessage" aria-live="polite" style="margin:18px auto;color:var(--cream-dim);font-style:italic;">✦ Lumin: “Find the matching symbols and restore the realm.”</p>
       <button type="button" class="btn-primary" id="mjNew">NEW REALM</button>
-    </div>
-  </section>
-
-  <section class="book-section" id="forged-community">
-    <div class="section-header reveal">
-      <span class="section-eyebrow">Enter the Community</span>
-      <h2 class="section-title">My <em>Forged Profile</em></h2>
-      <p class="section-desc">Choose your identity in the Forged universe, tell us what the stories mean to you, and build your own little corner of the realm.</p>
-    </div>
-    <div class="book-box reveal">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;align-items:start;">
-        <form id="forgedProfileForm" style="display:grid;gap:12px;">
-          <input id="profileName" maxlength="40" placeholder="Your display name" aria-label="Display name" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-          <select id="profileGuardian" aria-label="Choose your Guardian" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-            <option>Mercy 🕊️</option><option>Grace 🌿</option><option>Hope 🌅</option><option>Faith ✨</option><option>Mika 🕯️</option><option>Dragon 🐉</option>
-          </select>
-          <select id="profileRealm" aria-label="Choose your realm" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-            <option>The Realm of Mercy</option><option>The Dragon Realm</option><option>The Realm of Hope</option><option>The Realm of Faith</option><option>The Seven Realms</option><option>House of Mercy</option>
-          </select>
-          <input id="profileCharacter" maxlength="40" placeholder="Favourite Forged character" aria-label="Favourite Forged character" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-          <textarea id="profileJourney" maxlength="320" rows="5" placeholder="My Forged Journey — what brought you here?" aria-label="My Forged Journey" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
-          <button type="submit" class="btn-primary">FORGE MY PROFILE</button>
-          <p style="font-size:12px;color:var(--cream-dim);margin:0;">For now, your profile is saved only on this device. Public accounts and community profiles will come with the next stage.</p>
-        </form>
-        <div id="forgedProfileCard" style="min-height:360px;padding:30px;border:1px solid var(--border-bright);background:linear-gradient(145deg,#17130d,#0d0a07);text-align:center;box-shadow:0 18px 45px rgba(0,0,0,.28);">
-          <div id="profileSigil" style="font-size:58px;margin-bottom:12px;">🐉</div>
-          <span class="section-eyebrow" style="margin-bottom:10px;">Forged Community Member</span>
-          <h3 id="profilePreviewName" style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--cream);">Traveller</h3>
-          <p id="profilePreviewGuardian" style="color:var(--gold);font-family:'Cinzel',serif;margin:8px 0;">Dragon 🐉</p>
-          <p id="profilePreviewRealm" style="font-style:italic;color:var(--cream-dim);">The Seven Realms</p>
-          <div style="height:1px;background:var(--border);margin:22px 0;"></div>
-          <p id="profilePreviewCharacter"><strong>Favourite:</strong> Choose a character</p>
-          <p id="profilePreviewJourney" style="line-height:1.7;color:var(--cream-dim);margin-top:16px;">“Every journey into the realms begins with a first step.”</p>
-          <div style="margin-top:22px;font-size:25px;letter-spacing:8px;" title="Founding community badges">💎 🛡️ 🔥</div>
-          <p style="font-size:11px;color:var(--gold-dim);margin-top:8px;">FOUNDING TRAVELLER · CRYSTAL SEEKER · REALM EXPLORER</p>
-        </div>
-      </div>
     </div>
   </section>
 

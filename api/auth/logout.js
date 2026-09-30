@@ -1,0 +1,1 @@
+module.exports=(req,res)=>{res.setHeader("Set-Cookie","forged_session=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0");res.statusCode=302;res.setHeader("Location","/#forged-community");res.end()};

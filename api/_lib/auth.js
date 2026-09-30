@@ -1,0 +1,4 @@
+const crypto=require("crypto");
+function session(req){const cookies=Object.fromEntries(String(req.headers.cookie||"").split(";").map(x=>x.trim().split("=")).filter(x=>x.length===2));const raw=cookies.forged_session;if(!raw||!process.env.AUTH_SECRET)return null;const [p,s]=raw.split(".");if(!p||!s)return null;const ex=crypto.createHmac("sha256",process.env.AUTH_SECRET).update(p).digest("base64url"),A=Buffer.from(s),B=Buffer.from(ex);if(A.length!==B.length||!crypto.timingSafeEqual(A,B))return null;try{const d=JSON.parse(Buffer.from(p,"base64url").toString());return Date.now()<d.exp?d:null}catch{return null}}
+function hashEmail(email){return crypto.createHash("sha256").update(String(email).trim().toLowerCase()).digest("hex")}
+module.exports={session,hashEmail};

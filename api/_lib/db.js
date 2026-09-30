@@ -1,0 +1,5 @@
+const {Pool}=require("pg");
+let pool;
+function getPool(){const url=process.env.DATABASE_URL||process.env.POSTGRES_URL||process.env.PRISMA_DATABASE_URL;if(!url)throw new Error("DATABASE_NOT_CONFIGURED");if(!pool)pool=new Pool({connectionString:url,ssl:url.includes("localhost")?false:{rejectUnauthorized:false},max:3});return pool}
+async function init(){const p=getPool();await p.query(`CREATE TABLE IF NOT EXISTS forged_profiles (email_hash text PRIMARY KEY, display_name varchar(40) NOT NULL, guardian varchar(40), realm varchar(80), favourite varchar(60), journey varchar(320), created_at timestamptz DEFAULT now(), updated_at timestamptz DEFAULT now()); CREATE TABLE IF NOT EXISTS forged_posts (id bigserial PRIMARY KEY, email_hash text NOT NULL, display_name varchar(40) NOT NULL, category varchar(40) NOT NULL DEFAULT 'Book Discussion', body varchar(1000) NOT NULL, status varchar(20) NOT NULL DEFAULT 'published', created_at timestamptz DEFAULT now()); CREATE INDEX IF NOT EXISTS forged_posts_created_idx ON forged_posts(created_at DESC);`);return p}
+module.exports={init};

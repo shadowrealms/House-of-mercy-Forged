@@ -972,6 +972,31 @@
   </style>
 
   <style>
+
+    /* Forged community board */
+    .community-board { max-width: 920px; margin: 34px auto 0; }
+    .community-tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+    .community-tab { border:1px solid var(--border-bright); background:#100d09; color:var(--cream-dim); padding:10px 14px; font:600 11px 'Cinzel',serif; letter-spacing:.08em; cursor:pointer; }
+    .community-tab.active, .community-tab:hover { color:var(--gold); border-color:var(--gold); }
+    .post-composer, .feed-card { background:linear-gradient(145deg,#17130d,#0d0a07); border:1px solid var(--border-bright); padding:22px; margin-bottom:16px; }
+    .composer-fields { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .community-input { width:100%; box-sizing:border-box; padding:13px; background:#100d09; color:var(--cream); border:1px solid var(--border-bright); border-radius:4px; font:inherit; }
+    .community-textarea { min-height:112px; resize:vertical; margin-top:12px; }
+    .composer-actions { display:flex; align-items:center; gap:12px; justify-content:space-between; margin-top:12px; flex-wrap:wrap; }
+    .media-picker { color:var(--cream-dim); font-size:13px; }
+    .media-preview { display:none; margin-top:12px; max-height:280px; width:100%; object-fit:cover; border:1px solid var(--border-bright); }
+    .feed-card-head { display:flex; gap:12px; align-items:center; }
+    .feed-avatar { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:#302515; color:var(--gold); font:600 18px 'Cinzel',serif; flex:none; }
+    .feed-author { margin:0; color:var(--cream); font-family:'Cinzel',serif; font-size:13px; }
+    .feed-meta { margin:4px 0 0; color:var(--cream-dim); font-size:12px; }
+    .feed-card h3 { margin:18px 0 8px; color:var(--gold-light); font-size:22px; }
+    .feed-card p { white-space:pre-wrap; line-height:1.7; }
+    .feed-actions { display:flex; gap:18px; margin-top:18px; padding-top:14px; border-top:1px solid var(--border); }
+    .feed-action { appearance:none; border:0; background:transparent; color:var(--cream-dim); padding:0; cursor:pointer; font:600 11px 'Cinzel',serif; letter-spacing:.08em; }
+    .feed-action:hover, .feed-action.active { color:var(--gold); }
+    .board-notice { color:var(--cream-dim); font-size:13px; line-height:1.6; margin:12px 0 0; }
+    @media (max-width: 620px) { .composer-fields { grid-template-columns:1fr; } .post-composer, .feed-card { padding:16px; } }
+
     @media (max-width:760px){#realmsChatForm{grid-template-columns:1fr !important;}#realmsMessages{height:300px !important;}}
   </style>
 </head>
@@ -1423,40 +1448,35 @@
 
   <section class="book-section" id="community-stories">
     <div class="section-header reveal">
-      <span class="section-eyebrow">Your Voice Matters</span>
-      <h2 class="section-title">House of Mercy <em>Community Stories</em></h2>
-      <p class="section-desc">A place to talk about the books, share reviews, discuss characters and themes, and tell stories of hope, mercy, faith and second chances.</p>
+      <span class="section-eyebrow">The Forged Community</span>
+      <h2 class="section-title">Talk About the <em>Books</em></h2>
+      <p class="section-desc">Share theories, favourite scenes, reader art, photos, short videos, reviews, and stories of hope with the Forged community.</p>
     </div>
-    <div class="book-box reveal">
-      <div class="fashion-grid">
-        <div class="fashion-card">
-          <div style="font-size:42px;margin-bottom:12px;">📚</div>
-          <h3>Forged of the Realms Book Club</h3>
-          <p>Enter the group discussion room to talk about Caleb, Elyndra, dragons, favourite scenes, theories and reviews with other Forged readers.</p>
-          <a href="realms-room.html" class="btn-primary" style="margin-top:14px;display:inline-block;">💬 ENTER DISCUSSION ROOM</a>
-        </div>
-        <div class="fashion-card">
-          <div style="font-size:42px;margin-bottom:12px;">🕯️</div>
-          <h3>Stories of Hope</h3>
-          <p>Share something that may help another person keep going: mercy received, a second chance, recovery, kindness, faith, or a moment when someone simply showed up.</p>
-        </div>
+    <div class="community-board reveal">
+      <div class="community-tabs" aria-label="Community feed filters">
+        <button class="community-tab active" type="button" data-feed-filter="All">All posts</button>
+        <button class="community-tab" type="button" data-feed-filter="Book Discussion">Book discussion</button>
+        <button class="community-tab" type="button" data-feed-filter="Fan Creations">Fan creations</button>
+        <button class="community-tab" type="button" data-feed-filter="Hope & Mercy">Hope and mercy</button>
       </div>
-
-      <div style="max-width:760px;margin:34px auto 0;">
-        <h3 style="text-align:center;">Write Your Story</h3>
-        <p style="text-align:center;">Submissions are reviewed before publication. Please do not include private contact details or information about another person without their permission.</p>
-        <form id="communityForm" style="display:grid;gap:12px;margin-top:20px;">
-          <input id="communityName" maxlength="60" required placeholder="Your name or display name" aria-label="Your name or display name" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-          <select id="communityCategory" aria-label="Category" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-            <option>Book Review</option><option>Forged Discussion</option><option>Hope</option><option>Mercy</option><option>Faith</option><option>Second Chances</option><option>Mental Health & Encouragement</option><option>House of Mercy</option>
+      <form id="communityForm" class="post-composer">
+        <div class="composer-fields">
+          <input id="communityName" class="community-input" maxlength="40" required placeholder="Your display name" aria-label="Your display name">
+          <select id="communityCategory" class="community-input" aria-label="Post category">
+            <option>Book Discussion</option><option>Fan Creations</option><option>Hope &amp; Mercy</option><option>Review</option><option>Question for Readers</option>
           </select>
-          <input id="communityTitle" maxlength="100" required placeholder="Title" aria-label="Post title" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-          <textarea id="communityBody" maxlength="5000" required rows="9" placeholder="Write your review, discussion or story..." aria-label="Your story" style="padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;resize:vertical;"></textarea>
-          <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;"><input id="communityAgree" type="checkbox" required style="margin-top:4px;"> <span>I understand my submission may be edited for spelling or safety and will only be published after review. I will not submit abuse, threats, private information, or content that belongs to someone else.</span></label>
-          <button class="btn-primary" type="submit">SUBMIT FOR REVIEW</button>
-          <p id="communityStatus" aria-live="polite" style="text-align:center;margin:0;color:var(--cream-dim);"></p>
-        </form>
-      </div>
+        </div>
+        <input id="communityTitle" class="community-input" maxlength="100" required placeholder="Give your post a title" aria-label="Post title" style="margin-top:12px;">
+        <textarea id="communityBody" class="community-input community-textarea" maxlength="2000" required placeholder="What would you like to share about Forged of the Realms?" aria-label="Your post"></textarea>
+        <img id="communityImagePreview" class="media-preview" alt="Selected image preview">
+        <video id="communityVideoPreview" class="media-preview" controls aria-label="Selected video preview"></video>
+        <div class="composer-actions">
+          <label class="media-picker">Add photo or video <input id="communityMedia" type="file" accept="image/*,video/*" aria-label="Add a photo or video"></label>
+          <button class="btn-primary" type="submit">SAVE POST DRAFT</button>
+        </div>
+        <p id="communityStatus" class="board-notice" aria-live="polite">Posts are saved only on this device until the secure public community is connected.</p>
+      </form>
+      <div id="communityFeed" aria-live="polite"></div>
     </div>
   </section>
 
@@ -1781,21 +1801,21 @@
     })();
 
     
-    // Community Stories submission — opens a review email for the visitor to send.
+    // Community board: drafts remain in this browser until a server-backed community is connected.
     (() => {
-      const form=document.getElementById('communityForm'); if(!form)return;
-      form.addEventListener('submit',e=>{
-        e.preventDefault();
-        const name=document.getElementById('communityName').value.trim();
-        const category=document.getElementById('communityCategory').value;
-        const title=document.getElementById('communityTitle').value.trim();
-        const body=document.getElementById('communityBody').value.trim();
-        if(!name||!title||!body||!document.getElementById('communityAgree').checked)return;
-        const subject='Community Story Submission — '+category+' — '+title;
-        const text='HOUSE OF MERCY COMMUNITY SUBMISSION\n\nDisplay name: '+name+'\nCategory: '+category+'\nTitle: '+title+'\n\n'+body+'\n\nSubmitted for review before publication.';
-        document.getElementById('communityStatus').textContent='Your email app will open. Send the message to complete your submission for review.';
-        window.location.href='mailto:gumworld1976@yahoo.com.au?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
-      });
+      const form=document.getElementById('communityForm'); const feed=document.getElementById('communityFeed');
+      const media=document.getElementById('communityMedia'); const imagePreview=document.getElementById('communityImagePreview');
+      const videoPreview=document.getElementById('communityVideoPreview'); const status=document.getElementById('communityStatus');
+      if(!form||!feed)return;
+      const storageKey='forgedCommunityDrafts'; let filter='All'; let mediaUrl='';
+      const read=()=>{ try { return JSON.parse(localStorage.getItem(storageKey)||'[]'); } catch { return []; } };
+      const escape=value=>String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+      const render=()=>{ const posts=read().filter(post=>filter==='All'||post.category===filter); feed.innerHTML=posts.map((post,index)=>`<article class="feed-card"><div class="feed-card-head"><div class="feed-avatar">${escape(post.name).slice(0,1).toUpperCase()}</div><div><p class="feed-author">${escape(post.name)}</p><p class="feed-meta">${escape(post.category)} · Reader community</p></div></div><h3>${escape(post.title)}</h3><p>${escape(post.body)}</p><div class="feed-actions"><button class="feed-action" type="button" data-like="${index}">APPRECIATE <span>${post.likes||0}</span></button><button class="feed-action" type="button">REPLY <span>${post.comments||0}</span></button><button class="feed-action" type="button">SHARE</button></div></article>`).join('')||'<p class="board-notice">No posts in this category yet.</p>'; };
+      media.addEventListener('change',()=>{ const file=media.files&&media.files[0]; imagePreview.style.display='none'; videoPreview.style.display='none'; if(mediaUrl)URL.revokeObjectURL(mediaUrl); if(!file){mediaUrl='';return;} mediaUrl=URL.createObjectURL(file); const preview=file.type.startsWith('video/')?videoPreview:imagePreview;preview.src=mediaUrl;preview.style.display='block'; });
+      form.addEventListener('submit',event=>{event.preventDefault();const name=document.getElementById('communityName').value.trim();const category=document.getElementById('communityCategory').value;const title=document.getElementById('communityTitle').value.trim();const body=document.getElementById('communityBody').value.trim();if(!name||!title||!body)return;const posts=read();posts.unshift({name,category,title,body,likes:0,comments:0});try{localStorage.setItem(storageKey,JSON.stringify(posts.slice(0,30)));}catch{status.textContent='This browser cannot save a post draft. Please enable browser storage and try again.';return;}form.reset();if(mediaUrl)URL.revokeObjectURL(mediaUrl);mediaUrl='';imagePreview.style.display='none';videoPreview.style.display='none';status.textContent='Text draft saved on this device. Photo and video publishing will be enabled when secure community storage is connected.';render();});
+      document.querySelectorAll('[data-feed-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.feedFilter;document.querySelectorAll('[data-feed-filter]').forEach(item=>item.classList.toggle('active',item===button));render();}));
+      feed.addEventListener('click',event=>{const button=event.target.closest('[data-like]');if(!button)return;button.classList.toggle('active');const count=button.querySelector('span');count.textContent=Number(count.textContent)+(button.classList.contains('active')?1:-1);});
+      render();
     })();
 
     function toggleLumin() {

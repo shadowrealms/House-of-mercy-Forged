@@ -989,9 +989,13 @@
     </p>
     <div class="hero-actions">
       <a href="https://amzn.asia/d/0duAmAcl" target="_blank" rel="noopener noreferrer" class="btn-primary">📖 Buy Forged of the Realms</a>
+      <button type="button" id="forged-music-play" class="btn-secondary" style="cursor:pointer;">🎵 Play Forged Theme</button>
       <a href="#book" class="btn-secondary">Explore the Book</a>
       <a href="#mission" class="btn-secondary">Discover the Mission</a>
     </div>
+    <audio id="forged-theme" preload="metadata">
+      <source src="Forged%20Saga%20%28Medley%201%29%20%281%29.mp3" type="audio/mpeg">
+    </audio>
     <p style="position:relative;z-index:1;margin-top:18px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:.12em;color:var(--gold);">AVAILABLE NOW · PRINT &amp; EBOOK · ISBN 9781865210728</p>
   </section>
 
@@ -1711,5 +1715,27 @@
     }
   </script>
 
+
+  <script>
+    (() => {
+      const audio = document.getElementById('forged-theme');
+      const button = document.getElementById('forged-music-play');
+      if (!audio || !button) return;
+      button.addEventListener('click', async () => {
+        try {
+          if (audio.paused) {
+            await audio.play();
+            button.textContent = '⏸ Pause Forged Theme';
+          } else {
+            audio.pause();
+            button.textContent = '🎵 Play Forged Theme';
+          }
+        } catch (e) {
+          button.textContent = '🎵 Tap to Play Music';
+        }
+      });
+      audio.addEventListener('ended', () => { button.textContent = '🎵 Play Forged Theme'; });
+    })();
+  </script>
 </body>
   </html>

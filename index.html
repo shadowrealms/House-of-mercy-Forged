@@ -1006,8 +1006,8 @@
   <nav id="nav">
     <a href="#" class="nav-logo">House of Mercy</a>
     <ul class="nav-links">
-      <li><a href="#community-stories">🔥 Community</a></li>
-      <li><a href="#private-messages">✉️ Messages</a></li>
+      <li><a href="community-room.html#community-stories">🔥 Community</a></li>
+      <li><a href="community-room.html#private-messages">✉️ Messages</a></li>
       <li><a href="#story">Story</a></li>
       <li><a href="#characters">Characters</a></li>
       <li><a href="#mission">Mission</a></li>
@@ -1050,8 +1050,8 @@
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,48px);color:var(--cream);margin:8px 0 12px;">Your Realm. Your <em style="color:var(--gold);">Community.</em></h2>
       <p style="color:var(--cream-dim);max-width:680px;margin:0 auto 20px;">Join the book conversation or go straight to your private member messages.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="#community-stories" class="btn-primary">🔥 OPEN COMMUNITY</a>
-        <a href="#private-messages" class="btn-secondary">✉️ PRIVATE MESSAGES</a>
+        <a href="community-room.html#community-stories" class="btn-primary">🔥 OPEN COMMUNITY</a>
+        <a href="community-room.html#private-messages" class="btn-secondary">✉️ PRIVATE MESSAGES</a>
       </div>
     </div>
   </section>
@@ -1482,63 +1482,9 @@
     </div>
   </section>
 
-  <section class="book-section" id="community-stories">
-    <div class="section-header reveal">
-      <span class="section-eyebrow">The Forged Community</span>
-      <h2 class="section-title">Talk About the <em>Books</em></h2>
-      <p class="section-desc">Share theories, favourite scenes, reader art, photos, short videos, reviews, and stories of hope with the Forged community.</p>
-    </div>
-    <div class="community-board reveal">
-      <div class="community-tabs" aria-label="Community feed filters">
-        <button class="community-tab active" type="button" data-feed-filter="All">All posts</button>
-        <button class="community-tab" type="button" data-feed-filter="Book Discussion">Book discussion</button>
-        <button class="community-tab" type="button" data-feed-filter="Fan Creations">Fan creations</button>
-        <button class="community-tab" type="button" data-feed-filter="Hope & Mercy">Hope and mercy</button>
-      </div>
-      <form id="communityForm" class="post-composer">
-        <div class="composer-fields">
-          <input id="communityName" class="community-input" maxlength="40" placeholder="Your display name comes from your Forged profile" aria-label="Your display name" disabled>
-          <select id="communityCategory" class="community-input" aria-label="Post category">
-            <option>Book Discussion</option><option>Fan Creations</option><option>Hope &amp; Mercy</option><option>Review</option><option>Question for Readers</option>
-          </select>
-        </div>
-        <input id="communityTitle" class="community-input" maxlength="100" required placeholder="Give your post a title" aria-label="Post title" style="margin-top:12px;">
-        <textarea id="communityBody" class="community-input community-textarea" maxlength="2000" required placeholder="What would you like to share about Forged of the Realms?" aria-label="Your post"></textarea>
-        <img id="communityImagePreview" class="media-preview" alt="Selected image preview">
-        <video id="communityVideoPreview" class="media-preview" controls aria-label="Selected video preview"></video>
-        <div class="composer-actions">
-          <label class="media-picker">Add photo or video <input id="communityMedia" type="file" accept="image/*,video/*" aria-label="Add a photo or video"></label>
-          <button class="btn-primary" type="submit">PUBLISH TO COMMUNITY</button>
-        </div>
-        <p id="communityStatus" class="board-notice" aria-live="polite">Sign in and create your Forged profile to publish. Posts are shared with the reader community.</p>
-      </form>
-      <div id="communityFeed" aria-live="polite"></div>
-    </div>
-  </section>
+  
 
-  <section class="book-section" id="private-messages">
-  <div class="section-header reveal">
-    <span class="section-eyebrow">Members Only</span>
-    <h2 class="section-title">Private <em>Messages</em></h2>
-    <p class="section-desc">Talk privately with another signed-in Forged Community member. Email addresses are never shown. Block and report controls apply here too.</p>
-  </div>
-  <div class="book-box reveal" style="max-width:820px;margin-left:auto;margin-right:auto;">
-    <div style="display:grid;grid-template-columns:minmax(180px,.8fr) minmax(0,2fr);gap:14px;" class="message-layout">
-      <div>
-        <select id="messageMember" class="community-input" aria-label="Choose member"><option value="">Choose a member</option></select>
-        <button id="messageRefresh" type="button" class="btn-secondary" style="width:100%;margin-top:10px;">REFRESH MEMBERS</button>
-      </div>
-      <div>
-        <div id="messageThread" style="min-height:240px;max-height:420px;overflow:auto;border:1px solid var(--border);padding:14px;margin-bottom:10px;"><p class="board-notice">Choose a member to begin a private conversation.</p></div>
-        <form id="messageForm" style="display:flex;gap:8px;">
-          <input id="messageBody" class="community-input" maxlength="1000" required placeholder="Write a private message…" style="flex:1;">
-          <button class="btn-primary" type="submit">SEND</button>
-        </form>
-        <p id="messageStatus" class="board-notice" aria-live="polite">Signed-in members only. Never send passwords, banking details or other sensitive information.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  
 
 <section class="youtube-section" id="youtube">
     <div class="section-header reveal">
@@ -1670,7 +1616,7 @@
     <a href="#forged-trial">ENTER THE FORGED TRIAL</a><br>
     <a href="#dragon-run">PLAY DRAGON RUN</a><br>
     <a href="#forged-mahjong">PLAY FORGED MAHJONG</a><br>
-    <a href="#community-stories">COMMUNITY STORIES & REVIEWS</a><br>
+    <a href="community-room.html#community-stories">COMMUNITY STORIES & REVIEWS</a><br>
     <a href="#youtube">WATCH YOUTUBE</a><br>
     <a href="#donate">GO TO SUPPORT</a>
   </div>

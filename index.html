@@ -974,7 +974,20 @@
   <style>
 
     /* Forged community board */
-    .community-board { max-width: 920px; margin: 34px auto 0; }
+    .community-board { max-width: 1180px; margin: 34px auto 0; }
+    .social-shell { display:grid; grid-template-columns:220px minmax(0,1fr) 220px; gap:18px; align-items:start; }
+    .social-rail { position:sticky; top:86px; background:linear-gradient(145deg,#17130d,#0d0a07); border:1px solid var(--border-bright); padding:18px; }
+    .social-rail h3 { margin:0 0 10px; color:var(--gold); font:600 13px 'Cinzel',serif; letter-spacing:.08em; }
+    .social-rail p { color:var(--cream-dim); font-size:13px; line-height:1.55; }
+    .social-rail a { display:block; padding:10px 0; border-top:1px solid var(--border); color:var(--cream); text-decoration:none; font-size:13px; }
+    .social-rail a:hover { color:var(--gold); }
+    .member-card { text-align:center; }
+    .member-orb { width:68px;height:68px;border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:radial-gradient(circle at 30% 30%,#e4c77f,#5d421d 55%,#171009);color:#100b06;font:600 28px 'Cinzel',serif; }
+    .composer-prompt { display:flex;gap:12px;align-items:center;margin-bottom:14px; }
+    .composer-prompt span { color:var(--cream-dim);font-style:italic; }
+    .community-tabs { padding:12px;background:#100d09;border:1px solid var(--border); }
+    @media (max-width: 920px) { .social-shell{grid-template-columns:1fr}.social-rail{position:static}.social-rail.right{display:none} }
+
     .community-tabs { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
     .community-tab { border:1px solid var(--border-bright); background:#100d09; color:var(--cream-dim); padding:10px 14px; font:600 11px 'Cinzel',serif; letter-spacing:.08em; cursor:pointer; }
     .community-tab.active, .community-tab:hover { color:var(--gold); border-color:var(--gold); }
@@ -1482,7 +1495,61 @@
     </div>
   </section>
 
-  
+
+  <section class="book-section" id="community-stories">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">The Forged Community</span>
+      <h2 class="section-title">Talk About the <em>Books</em></h2>
+      <p class="section-desc">Share theories, favourite scenes, reader art, photos, short videos, reviews, and stories of hope with the Forged community.</p>
+    </div>
+    <div class="community-board reveal">
+      <div class="social-shell">
+        <aside class="social-rail member-card">
+          <div class="member-orb">F</div>
+          <h3>Your Forged Space</h3>
+          <p>Create a profile, join the discussion, and share your place in the realms.</p>
+          <a href="#forged-community">Create profile</a>
+          <a href="private-messages.html">Private messages</a>
+        </aside>
+        <div>
+      <div class="community-tabs" aria-label="Community feed filters">
+        <button class="community-tab active" type="button" data-feed-filter="All">All posts</button>
+        <button class="community-tab" type="button" data-feed-filter="Book Discussion">Book discussion</button>
+        <button class="community-tab" type="button" data-feed-filter="Fan Creations">Fan creations</button>
+        <button class="community-tab" type="button" data-feed-filter="Hope & Mercy">Hope and mercy</button>
+      </div>
+      <form id="communityForm" class="post-composer">
+        <div class="composer-prompt"><div class="member-orb" style="width:42px;height:42px;margin:0;font-size:18px;">F</div><span>What is happening in your Forged world?</span></div>
+        <div class="composer-fields">
+          <input id="communityName" class="community-input" maxlength="40" placeholder="Your display name comes from your Forged profile" aria-label="Your display name" disabled>
+          <select id="communityCategory" class="community-input" aria-label="Post category">
+            <option>Book Discussion</option><option>Fan Creations</option><option>Hope &amp; Mercy</option><option>Review</option><option>Question for Readers</option>
+          </select>
+        </div>
+        <input id="communityTitle" class="community-input" maxlength="100" required placeholder="Give your post a title" aria-label="Post title" style="margin-top:12px;">
+        <textarea id="communityBody" class="community-input community-textarea" maxlength="2000" required placeholder="What would you like to share about Forged of the Realms?" aria-label="Your post"></textarea>
+        <img id="communityImagePreview" class="media-preview" alt="Selected image preview">
+        <video id="communityVideoPreview" class="media-preview" controls aria-label="Selected video preview"></video>
+        <div class="composer-actions">
+          <label class="media-picker">Add photo or video <input id="communityMedia" type="file" accept="image/*,video/*" aria-label="Add a photo or video"></label>
+          <button class="btn-primary" type="submit">PUBLISH TO COMMUNITY</button>
+        </div>
+        <p id="communityStatus" class="board-notice" aria-live="polite">Sign in and create your Forged profile to publish. Posts are shared with the reader community.</p>
+      </form>
+      <div id="communityFeed" aria-live="polite"></div>
+        </div>
+        <aside class="social-rail right">
+          <h3>Community Activity</h3>
+          <p>Discuss characters, favourite scenes, theories, and stories of hope.</p>
+          <a href="realms-room.html">Enter community chat</a>
+          <a href="private-messages.html">Talk with members</a>
+          <a href="#forged-trial">Take the Forged Trial</a>
+          <a href="#book">Explore the books</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
 
   
 

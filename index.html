@@ -1305,28 +1305,7 @@
       </div>
     </div>
 
-  <section class="book-section" id="member-access">
-  <div class="section-header reveal">
-    <span class="section-eyebrow">Forged Community Access</span>
-    <h2 class="section-title">Enter the <em>Community</em></h2>
-    <p class="section-desc">Sign in securely by email. Your email address stays private and is never displayed on your public Forged profile.</p>
-  </div>
-  <div class="book-box reveal" style="max-width:760px;margin-left:auto;margin-right:auto;">
-    <div id="memberSignedOut">
-      <form id="memberLoginForm" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-        <input id="memberEmail" type="email" autocomplete="email" required placeholder="Your email address" aria-label="Email address" style="flex:1;min-width:230px;padding:14px;background:#100d09;color:var(--cream);border:1px solid var(--border-bright);border-radius:4px;">
-        <button type="submit" class="btn-primary">EMAIL MY SIGN-IN LINK</button>
-      </form>
-      <p id="memberLoginStatus" aria-live="polite" style="margin:14px 0 0;color:var(--cream-dim);text-align:center;">No password required. Secure links expire after 15 minutes.</p>
-    </div>
-    <div id="memberSignedIn" hidden style="text-align:center;">
-      <div style="font-size:42px;">🔥</div>
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--cream);margin:8px 0;">Welcome to the Forged Community</h3>
-      <p id="memberIdentity" style="color:var(--cream-dim);"></p>
-      <a href="/api/auth/logout" class="btn-secondary">SIGN OUT</a>
-    </div>
-  </div>
-</section>
+  
 
 <section class="book-section" id="forged-community">
     <div class="section-header reveal">
@@ -1859,14 +1838,7 @@
       audio.addEventListener('ended', () => { button.textContent = '🎵 Play Forged Theme'; });
     })();
   </script>
-<script>
-(async function forgedMemberAccess(){
- const out=document.getElementById('memberSignedOut'),inside=document.getElementById('memberSignedIn'),identity=document.getElementById('memberIdentity'),form=document.getElementById('memberLoginForm'),status=document.getElementById('memberLoginStatus');
- async function refresh(){try{const r=await fetch('/api/auth/session',{credentials:'same-origin'}),s=await r.json();if(s.authenticated){out.hidden=true;inside.hidden=false;identity.textContent='Signed in as '+s.user.email;}else{out.hidden=false;inside.hidden=true;}}catch{}}
- form&&form.addEventListener('submit',async e=>{e.preventDefault();const email=document.getElementById('memberEmail').value.trim();status.textContent='Sending your secure link…';try{const r=await fetch('/api/auth/request',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});const d=await r.json();status.textContent=d.message||d.error||'Please try again.';}catch{status.textContent='Sign-in is temporarily unavailable. Please try again.';}});
- refresh();
-})();
-</script>
+
 <script>
 (function persistentForgedProfile(){
  const form=document.getElementById('forgedProfileForm'),note=document.getElementById('profileSaveNote');if(!form)return;

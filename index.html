@@ -969,7 +969,35 @@
       .lumin-panel { left: 12px !important; right: 12px !important; bottom: 78px !important; width: auto !important; max-width: none !important; }
       .lumin-button { right: 14px !important; bottom: 14px !important; }
     }
-  @media(max-width:700px){.message-layout{grid-template-columns:1fr!important}} </style>
+  @media(max-width:700px){.message-layout{grid-template-columns:1fr!important}} 
+    /* Responsive cinematic landscape enhancement — preserves existing sections and scripts */
+    @media (orientation: landscape) and (min-width: 700px) {
+      nav { padding: 12px clamp(20px, 3vw, 48px); gap: 16px; }
+      .nav-links { gap: clamp(12px, 2vw, 30px); flex-wrap: wrap; }
+      .hero { min-height: 100svh; padding: 90px 5vw 48px; background-position: center center; }
+      .hero h1 { font-size: clamp(48px, 7vw, 104px); }
+      .hero-subtitle { margin-bottom: clamp(12px, 3vh, 34px); }
+      .hero-line { height: clamp(16px, 4vh, 42px); margin-bottom: clamp(12px, 3vh, 34px); }
+      .hero-para { margin-bottom: clamp(18px, 4vh, 42px); }
+      .story, .characters, .how, .poster, .fashion-section,
+      .contact-section, .privacy-section, .book-section, .youtube-section { max-width: min(1400px, 94vw); }
+      .stats-grid, .lily-inner, .remembrance-inner { max-width: min(1280px, 94vw); }
+      img, video, iframe { max-width: 100%; }
+    }
+    @media (orientation: landscape) and (max-height: 520px) {
+      .hero { min-height: 100svh; padding-top: 76px; padding-bottom: 28px; }
+      .hero-eyebrow { margin-bottom: 10px; }
+      .hero h1 { font-size: clamp(40px, 6vw, 72px); }
+      .hero-subtitle { margin-bottom: 12px; }
+      .hero-line { display: none; }
+      .hero-para { font-size: 14px; line-height: 1.45; margin-bottom: 16px; }
+      .btn-primary, .btn-secondary { padding: 11px 20px; }
+    }
+    @media (max-width: 699px) {
+      img, video, iframe { max-width: 100%; }
+    }
+
+  </style>
 
   <style>
 
